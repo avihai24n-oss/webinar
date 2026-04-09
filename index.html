@@ -258,64 +258,11 @@
             border-radius: 50%;
         }
 
-        .hero-cta-wrapper {
+        .hero-form-wrapper {
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease forwards 0.9s;
             margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .hero-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(135deg, var(--accent), #00d4ff);
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 25px rgba(0, 198, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-cta-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .hero-cta-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .hero-cta-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 35px rgba(0, 198, 255, 0.5);
-        }
-
-        .hero-cta-btn svg {
-            animation: bounceDown 1.5s ease-in-out infinite;
-        }
-
-        @keyframes bounceDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-        }
-
-        .hero-cta-sub {
-            margin-top: 0.8rem;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
         }
 
         @keyframes fadeInUp {
@@ -1455,7 +1402,7 @@
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
             <div class="logo">AI Webinar</div>
-            <a href="#register-top" class="nav-cta">הרשמה חינם</a>
+            <a href="#register-bottom" class="nav-cta">הרשמה חינם</a>
         </div>
     </nav>
 
@@ -1472,8 +1419,7 @@
 
             <h1 class="hero-title">
                 יצירת תמונות וסרטונים עם<br>
-                <span class="highlight animated-gradient">בינה מלאכותית</span><br>
-                שיגרמו לכם לשמוט את הלסת
+                <span class="highlight animated-gradient">בינה מלאכותית</span>
             </h1>
 
             <p class="hero-subtitle">גלו איך ליצור תוכן ויזואלי מקצועי בלי צלם, בלי מודלים ובלי ציוד יקר</p>
@@ -1504,13 +1450,15 @@
                 </div>
             </div>
 
-            <!-- CTA Button - scrolls to registration form -->
-            <div class="hero-cta-wrapper" id="register-top">
-                <a href="#register-bottom" class="hero-cta-btn">
-                    <span>הירשמו עכשיו - בחינם!</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                </a>
-                <p class="hero-cta-sub">מספר המקומות מוגבל ל-50 משתתפים</p>
+            <!-- Registration Form Top -->
+            <div class="hero-form-wrapper" id="register-top">
+                <div class="form-container">
+                    <h3>הירשמו עכשיו - בחינם!</h3>
+                    <p class="form-sub">מספר המקומות מוגבל ל-50 משתתפים</p>
+                    <div id="form-top">
+                        <script type='text/javascript' src='//form2.ravpage.co.il/a4e477aa924a83a0e34c5bd56eca15fb69D6CA14' charset='UTF-8'></script>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1890,7 +1838,7 @@
 
         // ===== COUNTDOWN =====
         function updateCountdown() {
-            const target = new Date('2025-04-15T20:00:00+03:00');
+            const target = new Date('2026-04-15T20:00:00+03:00');
             const now = new Date();
             const diff = target - now;
 
