@@ -499,19 +499,150 @@
             transform: scale(1);
         }
 
-        /* ===== TOPICS SECTION ===== */
+        /* ===== TOPICS JOURNEY SECTION ===== */
         .topics-section {
             background: var(--gradient-hero);
+            overflow: hidden;
         }
 
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
+        .journey-container {
+            position: relative;
+            margin-top: 4rem;
+            padding: 0 1rem;
         }
 
-        .topic-card {
+        /* SVG Path */
+        .journey-svg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .journey-path-bg {
+            fill: none;
+            stroke: rgba(37, 99, 235, 0.08);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .journey-path-fill {
+            fill: none;
+            stroke: url(#journeyGradient);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: var(--path-length);
+            stroke-dashoffset: var(--path-length);
+            transition: stroke-dashoffset 0.05s linear;
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.4));
+        }
+
+        .journey-glow-dot {
+            fill: var(--accent);
+            filter: drop-shadow(0 0 6px var(--accent)) drop-shadow(0 0 12px var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .journey-glow-dot.visible {
+            opacity: 1;
+        }
+
+        /* Nodes */
+        .journey-nodes {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        .journey-node {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .journey-node.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .journey-node:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .journey-node:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Node marker (circle with number) */
+        .node-marker {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--dark);
+            border: 2px solid rgba(37, 99, 235, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.6s ease;
+        }
+
+        .journey-node.active .node-marker {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.3), 0 0 60px rgba(6, 182, 212, 0.1);
+        }
+
+        .node-marker-inner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.6s ease;
+        }
+
+        .journey-node.active .node-marker-inner {
+            background: var(--gradient-1);
+            transform: scale(1.1);
+        }
+
+        .node-pulse {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            opacity: 0;
+            animation: none;
+        }
+
+        .journey-node.active .node-pulse {
+            animation: nodePulse 2s ease-out infinite;
+        }
+
+        @keyframes nodePulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Node content card */
+        .node-content {
+            flex: 1;
+            max-width: 450px;
             background: var(--dark-card);
             border: 1px solid rgba(37, 99, 235, 0.08);
             border-radius: 20px;
@@ -519,10 +650,14 @@
             position: relative;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: default;
         }
 
-        .topic-card::before {
+        .journey-node.active .node-content {
+            border-color: rgba(37, 99, 235, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(37, 99, 235, 0.03);
+        }
+
+        .node-content::before {
             content: '';
             position: absolute;
             top: 0;
@@ -530,73 +665,114 @@
             left: 0;
             height: 3px;
             background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            transform: scaleX(0);
+            transition: transform 0.6s ease 0.3s;
         }
 
-        .topic-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(37, 99, 235, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(37, 99, 235, 0.05);
+        .journey-node.active .node-content::before {
+            transform: scaleX(1);
         }
 
-        .topic-card:hover::before {
-            opacity: 1;
+        .node-step {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
         }
 
-        .topic-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(37, 99, 235, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 1.2rem;
-            transition: all 0.4s ease;
-        }
-
-        .topic-card:hover .topic-icon {
-            background: var(--gradient-1);
-            transform: scale(1.05);
-        }
-
-        .topic-card h3 {
-            font-size: 1.2rem;
+        .node-content h3 {
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
             color: var(--white);
         }
 
-        .topic-card p {
+        .node-content p {
             font-size: 0.95rem;
             color: var(--text-muted);
             line-height: 1.7;
         }
 
-        .topic-number {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: rgba(37, 99, 235, 0.3);
-            letter-spacing: 1px;
-        }
-
-        /* ===== SURPRISE CARD ===== */
-        .surprise-card {
+        /* Surprise node */
+        .journey-node.surprise .node-content {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.1));
             border: 1px solid rgba(6, 182, 212, 0.2);
         }
 
-        .surprise-card .topic-icon {
+        .journey-node.surprise.active .node-content {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(6, 182, 212, 0.08);
+        }
+
+        .journey-node.surprise .node-marker-inner {
             background: rgba(6, 182, 212, 0.15);
         }
 
-        .surprise-card:hover .topic-icon {
+        .journey-node.surprise.active .node-marker-inner {
             background: linear-gradient(135deg, #06b6d4, #2563eb);
+        }
+
+        /* Journey connector lines (mobile fallback) */
+        .journey-connector {
+            display: none;
+        }
+
+        /* ===== RESPONSIVE JOURNEY ===== */
+        @media (max-width: 768px) {
+            .journey-svg {
+                display: none;
+            }
+
+            .journey-connector {
+                display: block;
+                width: 2px;
+                height: 3rem;
+                background: linear-gradient(to bottom, var(--accent), rgba(37, 99, 235, 0.2));
+                margin: 0 auto;
+                position: relative;
+            }
+
+            .journey-connector::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 8px;
+                height: 8px;
+                background: var(--accent);
+                border-radius: 50%;
+                box-shadow: 0 0 10px var(--accent-glow);
+            }
+
+            .journey-nodes {
+                gap: 0;
+            }
+
+            .journey-node,
+            .journey-node:nth-child(odd),
+            .journey-node:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .node-marker {
+                width: 64px;
+                height: 64px;
+            }
+
+            .node-marker-inner {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+            }
+
+            .node-content {
+                max-width: 100%;
+            }
         }
 
         /* ===== PATH / TIMELINE ===== */
@@ -1079,10 +1255,6 @@
                 transform: none;
             }
 
-            .topics-grid {
-                grid-template-columns: 1fr;
-            }
-
             .audience-grid {
                 grid-template-columns: 1fr;
             }
@@ -1286,41 +1458,85 @@
         </div>
     </section>
 
-    <!-- Topics Section -->
-    <section class="topics-section">
+    <!-- Topics Journey Section -->
+    <section class="topics-section" id="journey-section">
         <div class="section-container">
             <div class="reveal" style="text-align: center;">
                 <span class="section-label">📋 מה תלמדו</span>
                 <h2 class="section-title">נושאים מרכזיים בוובינר</h2>
+                <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 1rem;">גללו למטה וגלו את המסלול שלכם 👇</p>
             </div>
 
-            <div class="topics-grid">
-                <div class="topic-card reveal delay-1 glow-card">
-                    <span class="topic-number">01</span>
-                    <div class="topic-icon">🔧</div>
-                    <h3>הכרות עם הפלטפורמה</h3>
-                    <p>היכרות עם הכלי היחיד בארץ שמאפשר יצירת תוכן AI מקצועי בעברית, בממשק פשוט, בלי קורס הנדסה. תראו למה עסקים קטנים עוברים אליו ולא עוזבים.</p>
-                </div>
+            <div class="journey-container" id="journeyContainer">
+                <!-- SVG Path (desktop only) -->
+                <svg class="journey-svg" id="journeySvg" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="journeyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path id="journeyPathBg" class="journey-path-bg" />
+                    <path id="journeyPathFill" class="journey-path-fill" />
+                    <circle id="journeyGlowDot" class="journey-glow-dot" r="6" />
+                </svg>
 
-                <div class="topic-card reveal delay-2 glow-card">
-                    <span class="topic-number">02</span>
-                    <div class="topic-icon">🎨</div>
-                    <h3>מדמיינים - ומקבלים תמונה אמיתית</h3>
-                    <p>איך יוצרים תמונות ריאליסטיות או מצוירות לפי הסגנון שלכם. זה ממש כמו קסם!</p>
-                </div>
+                <!-- Journey Nodes -->
+                <div class="journey-nodes" id="journeyNodes">
+                    <div class="journey-node" data-step="1">
+                        <div class="node-marker">
+                            <div class="node-marker-inner">🔧</div>
+                            <div class="node-pulse"></div>
+                        </div>
+                        <div class="node-content">
+                            <span class="node-step">שלב 01</span>
+                            <h3>הכרות עם הפלטפורמה</h3>
+                            <p>היכרות עם הכלי היחיד בארץ שמאפשר יצירת תוכן AI מקצועי בעברית, בממשק פשוט, בלי קורס הנדסה. תראו למה עסקים קטנים עוברים אליו ולא עוזבים.</p>
+                        </div>
+                    </div>
 
-                <div class="topic-card reveal delay-3 glow-card">
-                    <span class="topic-number">03</span>
-                    <div class="topic-icon">🎬</div>
-                    <h3>התמונה שלכם עכשיו נעה</h3>
-                    <p>איך לוקחים תמונה שיצרתם ב-AI והופכים אותה לסרטון מקצועי תוך דקות — בלי עריכה, בלי After Effects, בלי תקציב הפקה.</p>
-                </div>
+                    <div class="journey-connector"></div>
 
-                <div class="topic-card surprise-card reveal delay-4 glow-card">
-                    <span class="topic-number">🎁</span>
-                    <div class="topic-icon">✨</div>
-                    <h3>הפתעה למי שנשאר עד הסוף!</h3>
-                    <p>תשארו עד הסוף (:</p>
+                    <div class="journey-node" data-step="2">
+                        <div class="node-marker">
+                            <div class="node-marker-inner">🎨</div>
+                            <div class="node-pulse"></div>
+                        </div>
+                        <div class="node-content">
+                            <span class="node-step">שלב 02</span>
+                            <h3>מדמיינים - ומקבלים תמונה אמיתית</h3>
+                            <p>איך יוצרים תמונות ריאליסטיות או מצוירות לפי הסגנון שלכם. זה ממש כמו קסם!</p>
+                        </div>
+                    </div>
+
+                    <div class="journey-connector"></div>
+
+                    <div class="journey-node" data-step="3">
+                        <div class="node-marker">
+                            <div class="node-marker-inner">🎬</div>
+                            <div class="node-pulse"></div>
+                        </div>
+                        <div class="node-content">
+                            <span class="node-step">שלב 03</span>
+                            <h3>התמונה שלכם עכשיו נעה</h3>
+                            <p>איך לוקחים תמונה שיצרתם ב-AI והופכים אותה לסרטון מקצועי תוך דקות — בלי עריכה, בלי After Effects, בלי תקציב הפקה.</p>
+                        </div>
+                    </div>
+
+                    <div class="journey-connector"></div>
+
+                    <div class="journey-node surprise" data-step="4">
+                        <div class="node-marker">
+                            <div class="node-marker-inner">✨</div>
+                            <div class="node-pulse"></div>
+                        </div>
+                        <div class="node-content">
+                            <span class="node-step">🎁 בונוס</span>
+                            <h3>הפתעה למי שנשאר עד הסוף!</h3>
+                            <p>תשארו עד הסוף (:</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1627,8 +1843,115 @@
 
         // ===== RAVMESSER FORMS ARE LOADED VIA INLINE SCRIPT TAGS =====
 
+        // ===== JOURNEY PATH ANIMATION =====
+        (function() {
+            const svg = document.getElementById('journeySvg');
+            const pathBg = document.getElementById('journeyPathBg');
+            const pathFill = document.getElementById('journeyPathFill');
+            const glowDot = document.getElementById('journeyGlowDot');
+            const container = document.getElementById('journeyContainer');
+            const nodes = document.querySelectorAll('.journey-node');
+
+            if (!svg || !nodes.length) return;
+
+            function buildPath() {
+                if (window.innerWidth <= 768) return;
+
+                const containerRect = container.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                const offsetX = svgRect.left - containerRect.left;
+
+                const points = [];
+                nodes.forEach((node, i) => {
+                    const marker = node.querySelector('.node-marker');
+                    const rect = marker.getBoundingClientRect();
+                    const x = (rect.left + rect.width / 2) - containerRect.left;
+                    const y = (rect.top + rect.height / 2) - containerRect.top;
+                    points.push({ x: x - offsetX, y });
+                });
+
+                if (points.length < 2) return;
+
+                // Build smooth cubic bezier path
+                let d = `M ${points[0].x} ${points[0].y}`;
+                for (let i = 0; i < points.length - 1; i++) {
+                    const curr = points[i];
+                    const next = points[i + 1];
+                    const midY = (curr.y + next.y) / 2;
+                    d += ` C ${curr.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y}`;
+                }
+
+                svg.setAttribute('viewBox', `0 0 ${svgRect.width} ${containerRect.height}`);
+                svg.style.height = containerRect.height + 'px';
+                pathBg.setAttribute('d', d);
+                pathFill.setAttribute('d', d);
+
+                const pathLength = pathFill.getTotalLength();
+                pathFill.style.setProperty('--path-length', pathLength);
+                pathFill.style.strokeDasharray = pathLength;
+                pathFill.style.strokeDashoffset = pathLength;
+
+                return pathLength;
+            }
+
+            let totalLength = 0;
+
+            function initPath() {
+                requestAnimationFrame(() => {
+                    totalLength = buildPath() || 0;
+                });
+            }
+
+            // Observe journey nodes
+            const journeyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.3, rootMargin: '0px 0px -80px 0px' });
+
+            nodes.forEach(node => journeyObserver.observe(node));
+
+            // Scroll-driven path fill
+            function updatePathOnScroll() {
+                if (window.innerWidth <= 768 || !totalLength) return;
+
+                const containerRect = container.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const containerTop = containerRect.top;
+                const containerHeight = containerRect.height;
+
+                // Calculate progress: 0 when section enters, 1 when section leaves
+                const start = containerTop - windowHeight * 0.6;
+                const end = containerTop + containerHeight - windowHeight * 0.4;
+                const progress = Math.min(Math.max((- start) / (end - start), 0), 1);
+
+                const offset = totalLength * (1 - progress);
+                pathFill.style.strokeDashoffset = offset;
+
+                // Move glow dot
+                if (progress > 0.01 && progress < 1) {
+                    const point = pathFill.getPointAtLength(totalLength * progress);
+                    glowDot.setAttribute('cx', point.x);
+                    glowDot.setAttribute('cy', point.y);
+                    glowDot.classList.add('visible');
+                } else {
+                    glowDot.classList.remove('visible');
+                }
+            }
+
+            window.addEventListener('scroll', updatePathOnScroll, { passive: true });
+
+            // Init after layout settles
+            setTimeout(initPath, 300);
+            window.addEventListener('resize', () => {
+                setTimeout(() => { totalLength = buildPath() || 0; }, 100);
+            });
+        })();
+
         // ===== PARALLAX ON CARDS =====
-        document.querySelectorAll('.topic-card, .outcome-card').forEach(card => {
+        document.querySelectorAll('.outcome-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
