@@ -294,6 +294,32 @@
             margin-top: 0.3rem;
         }
 
+        /* Last Spots */
+        .last-spots {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ef4444;
+            animation: pulse-glow 2s ease-in-out infinite;
+            margin-bottom: 0.4rem;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+            50% { box-shadow: 0 0 20px 4px rgba(239, 68, 68, 0.15); }
+        }
+
+        .free-note {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #06b6d4;
+            margin-bottom: 1.5rem;
+        }
+
         /* Form Card */
         .form-card {
             background: #111827;
@@ -507,25 +533,9 @@
             <span>🕗 20:00</span>
         </div>
 
-        <!-- Countdown -->
-        <div class="countdown">
-            <div class="countdown-item">
-                <div class="countdown-num" id="days">00</div>
-                <div class="countdown-lbl">ימים</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-num" id="hours">00</div>
-                <div class="countdown-lbl">שעות</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-num" id="minutes">00</div>
-                <div class="countdown-lbl">דקות</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-num" id="seconds">00</div>
-                <div class="countdown-lbl">שניות</div>
-            </div>
-        </div>
+        <!-- Last spots + free -->
+        <div class="last-spots">🔥 מקומות אחרונים!</div>
+        <p class="free-note">זה בחינם! אל תפספסו..</p>
 
         <!-- Form -->
         <div class="form-card">
@@ -582,33 +592,5 @@
         <p class="footer-note">© 2026 AI Webinar | כל הזכויות שמורות</p>
     </div>
 
-    <script>
-        function updateCountdown() {
-            const target = new Date('2026-04-15T20:00:00+03:00');
-            const now = new Date();
-            const diff = target - now;
-
-            if (diff <= 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
 </body>
 </html>
