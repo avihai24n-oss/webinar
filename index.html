@@ -983,29 +983,21 @@
 
         .about-image {
             width: 280px;
-            height: 280px;
+            height: 320px;
             border-radius: 30px;
             background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6rem;
             position: relative;
             overflow: hidden;
+            padding: 3px;
         }
 
-        .about-image::before {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            background: var(--dark-card);
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
             border-radius: 28px;
-            z-index: 0;
-        }
-
-        .about-image span {
-            position: relative;
-            z-index: 1;
+            display: block;
         }
 
         .about-stats {
@@ -1023,6 +1015,76 @@
             font-weight: 600;
             color: var(--accent);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== LOGO CAROUSEL ===== */
+        .logo-carousel-wrapper {
+            text-align: center;
+        }
+
+        .logo-carousel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .logo-carousel {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+
+        .logo-track {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            width: max-content;
+            animation: scrollLogos 25s linear infinite;
+        }
+
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            width: 120px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: brightness(0) invert(1) opacity(0.5);
+            transition: all 0.4s ease;
+        }
+
+        .logo-item:hover {
+            filter: brightness(0) invert(1) opacity(0.9);
+            transform: scale(1.1);
+        }
+
+        .logo-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 768px) {
+            .logo-item {
+                width: 90px;
+                height: 45px;
+            }
+            .logo-track {
+                gap: 2rem;
+            }
         }
 
         .about-text h3 {
@@ -1630,7 +1692,7 @@
             <div class="about-wrapper reveal">
                 <div class="about-image-wrapper">
                     <div class="about-image">
-                        <span>🧑‍💻</span>
+                        <img src="avihai.jpg" alt="אביחי אלנקווה">
                     </div>
                     <div class="about-stats">
                         👥 50K+ עוקבים
@@ -1647,6 +1709,30 @@
                         <span class="about-tag">תוכן ויזואלי</span>
                         <span class="about-tag">AI לעסקים</span>
                         <span class="about-tag">הרצאות וסדנאות</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo Carousel -->
+            <div class="logo-carousel-wrapper reveal" style="margin-top: 3rem;">
+                <p class="logo-carousel-title">חברות שעבדתי איתן</p>
+                <div class="logo-carousel">
+                    <div class="logo-track">
+                        <div class="logo-item"><img src="2dc1ca6a-5314-4b98-b687-2fb11d080983.png" alt="ערוץ 12"></div>
+                        <div class="logo-item"><img src="logo600X315.png" alt="קשת"></div>
+                        <div class="logo-item"><img src="672d70c2-6538-456c-aa23-320283b2f82d.png" alt="Webot"></div>
+                        <div class="logo-item"><img src="7482d683-14fb-49cd-8d91-f92e3b8d16ad.png" alt="Nym"></div>
+                        <div class="logo-item"><img src="a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png" alt="Daniella"></div>
+                        <div class="logo-item"><img src="abfa8a66-1d19-477c-852d-d3035adee613.png" alt="אבן נדלן"></div>
+                        <div class="logo-item"><img src="images.png" alt="BizAid"></div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="logo-item"><img src="2dc1ca6a-5314-4b98-b687-2fb11d080983.png" alt="ערוץ 12"></div>
+                        <div class="logo-item"><img src="logo600X315.png" alt="קשת"></div>
+                        <div class="logo-item"><img src="672d70c2-6538-456c-aa23-320283b2f82d.png" alt="Webot"></div>
+                        <div class="logo-item"><img src="7482d683-14fb-49cd-8d91-f92e3b8d16ad.png" alt="Nym"></div>
+                        <div class="logo-item"><img src="a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png" alt="Daniella"></div>
+                        <div class="logo-item"><img src="abfa8a66-1d19-477c-852d-d3035adee613.png" alt="אבן נדלן"></div>
+                        <div class="logo-item"><img src="images.png" alt="BizAid"></div>
                     </div>
                 </div>
             </div>
