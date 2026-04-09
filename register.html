@@ -120,12 +120,65 @@
             line-height: 1.6;
         }
 
+        /* Social Proof Bar */
+        .social-proof-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            direction: rtl;
+        }
+
+        .proof-avatar-large {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top center;
+            border: 2px solid rgba(6, 182, 212, 0.5);
+            flex-shrink: 0;
+        }
+
+        .proof-text {
+            text-align: right;
+            line-height: 1.4;
+        }
+
+        .proof-text strong {
+            display: block;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .proof-text span {
+            font-size: 0.78rem;
+            color: #06b6d4;
+            font-weight: 500;
+        }
+
+        /* Learn Section */
+        .learn-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .learn-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.8rem;
+        }
+
         /* Benefits */
         .benefits {
             display: flex;
             flex-direction: column;
             gap: 0.6rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
 
         .benefit {
@@ -185,6 +238,9 @@
         .container > :nth-child(6) { animation-delay: 0.6s; }
         .container > :nth-child(7) { animation-delay: 0.7s; }
         .container > :nth-child(8) { animation-delay: 0.8s; }
+        .container > :nth-child(9) { animation-delay: 0.9s; }
+        .container > :nth-child(10) { animation-delay: 1s; }
+        .container > :nth-child(11) { animation-delay: 1.1s; }
 
         /* Date & Time */
         .event-info {
@@ -423,11 +479,27 @@
         </div>
 
         <!-- Title -->
-        <h1>יצירת תמונות וסרטונים עם <span>בינה מלאכותית</span></h1>
-        <div class="benefits">
-            <div class="benefit"><div class="benefit-icon">✓</div>בלי צלם ובלי ציוד</div>
-            <div class="benefit"><div class="benefit-icon">✓</div>תוצאות מקצועיות תוך דקות</div>
-            <div class="benefit"><div class="benefit-icon">✓</div>מתאים גם למי שאף פעם לא עבד עם AI</div>
+        <h1>איך ליצור תוכן ויזואלי <span>ברמה הוליוודית</span> ב-5 דקות</h1>
+        <p class="subtitle">(גם אם אין לכם מושג ב-AI)</p>
+
+        <!-- Social Proof Bar -->
+        <div class="social-proof-bar">
+            <img src="my photo.jpg" alt="אביחי אלנקווה" class="proof-avatar-large">
+            <div class="proof-text">
+                <strong>עם אביחי אלנקווה</strong>
+                <span>50K+ עוקבים · ערוץ 12 · קשת · ועוד</span>
+            </div>
+        </div>
+
+        <!-- What you'll learn -->
+        <div class="learn-section">
+            <h3 class="learn-title">🎯 מה תלמדו בוובינר?</h3>
+            <div class="benefits">
+                <div class="benefit"><div class="benefit-icon">🎨</div>איך להפוך טקסט לתמונת מוצר מקצועית</div>
+                <div class="benefit"><div class="benefit-icon">🎬</div>איך ליצור סרטון מתמונה בלי After Effects</div>
+                <div class="benefit"><div class="benefit-icon">⚡</div>תהליך עבודה מלא מהרעיון לתוצאה ב-5 דקות</div>
+                <div class="benefit"><div class="benefit-icon">🚀</div>הכלי שמחליף צלם, גרפיקאי ועורך וידאו</div>
+            </div>
         </div>
 
         <!-- Date -->
@@ -481,12 +553,6 @@
                     אינסטגרם
                 </a>
             </div>
-        </div>
-
-        <!-- Social proof -->
-        <div class="social-proof">
-            <img src="avihai.jpg" alt="אביחי אלנקווה" class="proof-avatar">
-            עם <span>אביחי אלנקווה</span> · 50K+ עוקבים · ערוץ 12, קשת ועוד
         </div>
 
         <p class="footer-note">© 2026 AI Webinar | כל הזכויות שמורות</p>
