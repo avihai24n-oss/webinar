@@ -940,19 +940,26 @@
             let offset = 0;
             const speed = 0.5;
 
-            function tick() {
-                offset += speed;
-                const first = track.firstElementChild;
-                if (first && offset >= first.offsetWidth + gap) {
-                    offset -= first.offsetWidth + gap;
-                    track.appendChild(first); // move to end
-                }
-                track.style.transform = 'translateX(' + (-offset) + 'px)';
-                requestAnimationFrame(tick);
-            }
-
-            // Start after images load
+            // Start after images load - measure once, animate forever
             window.addEventListener('load', function() {
+                // Pre-measure all item widths once
+                const items = track.querySelectorAll('.logo-item');
+                const widths = [];
+                items.forEach(function(item) { widths.push(item.offsetWidth + gap); });
+
+                let firstIndex = 0;
+
+                function tick() {
+                    offset += speed;
+                    if (offset >= widths[firstIndex % widths.length]) {
+                        offset -= widths[firstIndex % widths.length];
+                        track.appendChild(track.firstElementChild);
+                        firstIndex++;
+                    }
+                    track.style.transform = 'translateX(' + (-offset) + 'px)';
+                    requestAnimationFrame(tick);
+                }
+
                 requestAnimationFrame(tick);
             });
         })();
