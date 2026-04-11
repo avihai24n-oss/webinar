@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>וובינר AI | יצירת תמונות וסרטונים עם בינה מלאכותית</title>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '15758051903280833');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=15758051903280833&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -994,6 +1012,35 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
+        });
+
+        // ===== META PIXEL - LEAD EVENT ON FORM SUBMIT =====
+        document.querySelectorAll('.form-embed').forEach(function(container) {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    // Detect form inside iframe or injected form
+                    const forms = container.querySelectorAll('form');
+                    forms.forEach(function(form) {
+                        if (!form.dataset.pixelBound) {
+                            form.dataset.pixelBound = 'true';
+                            form.addEventListener('submit', function() {
+                                if (typeof fbq === 'function') {
+                                    fbq('track', 'Lead');
+                                }
+                            });
+                        }
+                    });
+
+                    // Also watch for success message (form replaced after submit)
+                    const successTexts = container.querySelectorAll('.thank-you, .success, [class*="success"], [class*="thank"]');
+                    if (successTexts.length > 0) {
+                        if (typeof fbq === 'function') {
+                            fbq('track', 'Lead');
+                        }
+                    }
+                });
+            });
+            observer.observe(container, { childList: true, subtree: true });
         });
     </script>
 </body>

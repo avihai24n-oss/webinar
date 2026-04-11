@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרשמה לוובינר | יצירת תמונות וסרטונים עם AI</title>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '15758051903280833');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=15758051903280833&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -592,5 +610,31 @@
         <p class="footer-note">© 2026 AI Webinar | כל הזכויות שמורות</p>
     </div>
 
+    <script>
+        // Meta Pixel - Lead Event on form submit
+        const formContainer = document.getElementById('rav-form');
+        if (formContainer) {
+            const observer = new MutationObserver(function(mutations) {
+                const forms = formContainer.querySelectorAll('form');
+                forms.forEach(function(form) {
+                    if (!form.dataset.pixelBound) {
+                        form.dataset.pixelBound = 'true';
+                        form.addEventListener('submit', function() {
+                            if (typeof fbq === 'function') {
+                                fbq('track', 'Lead');
+                            }
+                        });
+                    }
+                });
+                const successTexts = formContainer.querySelectorAll('.thank-you, .success, [class*="success"], [class*="thank"]');
+                if (successTexts.length > 0) {
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead');
+                    }
+                }
+            });
+            observer.observe(formContainer, { childList: true, subtree: true });
+        }
+    </script>
 </body>
 </html>
