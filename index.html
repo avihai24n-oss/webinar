@@ -470,7 +470,7 @@
 
         @keyframes scrollLogos {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-25%); }
         }
 
         /* ===== CTA BOTTOM ===== */
@@ -843,22 +843,7 @@
             <div class="logo-carousel-wrapper reveal">
                 <p class="logo-carousel-title">חברות שעבדתי איתן</p>
                 <div class="logo-carousel">
-                    <div class="logo-track">
-                        <div class="logo-item"><img src="2dc1ca6a-5314-4b98-b687-2fb11d080983.png" alt="ערוץ 12"></div>
-                        <div class="logo-item"><img src="logo600X315.png" alt="קשת"></div>
-                        <div class="logo-item"><img src="672d70c2-6538-456c-aa23-320283b2f82d.png" alt="Webot"></div>
-                        <div class="logo-item"><img src="7482d683-14fb-49cd-8d91-f92e3b8d16ad.png" alt="Nym"></div>
-                        <div class="logo-item"><img src="a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png" alt="Daniella"></div>
-                        <div class="logo-item"><img src="abfa8a66-1d19-477c-852d-d3035adee613.png" alt="אבן נדלן"></div>
-                        <div class="logo-item"><img src="images.png" alt="BizAid"></div>
-                        <!-- Duplicate for seamless loop -->
-                        <div class="logo-item"><img src="2dc1ca6a-5314-4b98-b687-2fb11d080983.png" alt="ערוץ 12"></div>
-                        <div class="logo-item"><img src="logo600X315.png" alt="קשת"></div>
-                        <div class="logo-item"><img src="672d70c2-6538-456c-aa23-320283b2f82d.png" alt="Webot"></div>
-                        <div class="logo-item"><img src="7482d683-14fb-49cd-8d91-f92e3b8d16ad.png" alt="Nym"></div>
-                        <div class="logo-item"><img src="a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png" alt="Daniella"></div>
-                        <div class="logo-item"><img src="abfa8a66-1d19-477c-852d-d3035adee613.png" alt="אבן נדלן"></div>
-                        <div class="logo-item"><img src="images.png" alt="BizAid"></div>
+                    <div class="logo-track" id="logoTrack">
                     </div>
                 </div>
             </div>
@@ -929,6 +914,29 @@
         }, { threshold: 0.1 });
 
         reveals.forEach(el => observer.observe(el));
+
+        // ===== LOGO INFINITE LOOP =====
+        (function() {
+            const logos = [
+                { src: '2dc1ca6a-5314-4b98-b687-2fb11d080983.png', alt: 'ערוץ 12' },
+                { src: 'logo600X315.png', alt: 'קשת' },
+                { src: '672d70c2-6538-456c-aa23-320283b2f82d.png', alt: 'Webot' },
+                { src: '7482d683-14fb-49cd-8d91-f92e3b8d16ad.png', alt: 'Nym' },
+                { src: 'a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png', alt: 'Daniella' },
+                { src: 'abfa8a66-1d19-477c-852d-d3035adee613.png', alt: 'אבן נדלן' },
+                { src: 'images.png', alt: 'BizAid' }
+            ];
+            const track = document.getElementById('logoTrack');
+            // Create 4 copies for seamless infinite loop
+            for (let copy = 0; copy < 4; copy++) {
+                logos.forEach(logo => {
+                    const div = document.createElement('div');
+                    div.className = 'logo-item';
+                    div.innerHTML = '<img src="' + logo.src + '" alt="' + logo.alt + '">';
+                    track.appendChild(div);
+                });
+            }
+        })();
 
         // ===== SHOWCASE CAROUSEL =====
         const carousel = document.getElementById('showcaseCarousel');
