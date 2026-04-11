@@ -443,7 +443,6 @@
         .logo-track {
             display: flex;
             gap: 2.5rem;
-            animation: scrollLogos 20s linear infinite;
             width: max-content;
         }
 
@@ -468,10 +467,6 @@
             filter: brightness(1) contrast(1);
         }
 
-        @keyframes scrollLogos {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-25%); }
-        }
 
         /* ===== CTA BOTTOM ===== */
         .cta-section {
@@ -762,34 +757,34 @@
 
             <div class="content-cards">
                 <div class="content-card">
-                    <div class="card-icon">🔧</div>
+                    <div class="card-icon">💰</div>
                     <div class="card-text">
-                        <h4>הכרות עם הפלטפורמה</h4>
-                        <p>היכרות עם הכלי היחיד בארץ שמאפשר יצירת תוכן AI מקצועי בעברית, בממשק פשוט, בלי קורס הנדסה. תראו למה עסקים קטנים עוברים אליו ולא עוזבים.</p>
+                        <h4>הכירו את הכלי שחוסך לעסקים אלפי שקלים בחודש</h4>
+                        <p>משלמים 3,000-5,000₪ על כל סט צילומים? תכירו את הכלי שמייצר תוכן מקצועי בעברית, ישירות מהמחשב, בלי צלם ובלי סטודיו.</p>
                     </div>
                 </div>
 
                 <div class="content-card">
-                    <div class="card-icon">🎨</div>
+                    <div class="card-icon">📸</div>
                     <div class="card-text">
-                        <h4>מדמיינים — ומקבלים תמונה אמיתית</h4>
-                        <p>איך יוצרים תמונות ריאליסטיות או מצוירות לפי הסגנון שלכם. זה ממש כמו קסם!</p>
+                        <h4>תמונות מוצר ברמת סטודיו — בלי לצאת מהבית!</h4>
+                        <p>במקום לשלם לצלם, לשכור סטודיו ולחכות שבועות — תקבלו תמונות מקצועיות תוך דקות, בדיוק בסגנון שלכם.</p>
                     </div>
                 </div>
 
                 <div class="content-card">
                     <div class="card-icon">🎬</div>
                     <div class="card-text">
-                        <h4>התמונה שלכם עכשיו נעה</h4>
-                        <p>איך לוקחים תמונה שיצרתם ב-AI והופכים אותה לסרטון מקצועי תוך דקות — בלי עריכה, בלי After Effects, בלי תקציב הפקה.</p>
+                        <h4>סרטון פרסומת מוכן — בלי הפקה של אלפי שקלים</h4>
+                        <p>הפקת סרטון עולה 5,000₪ ומעלה? תלמדו להפוך תמונת AI לסרטון מקצועי תוך דקות — בלי עריכה, בלי After Effects.</p>
                     </div>
                 </div>
 
                 <div class="content-card">
                     <div class="card-icon">🎁</div>
                     <div class="card-text">
-                        <h4>הפתעה למי שנשאר עד הסוף!</h4>
-                        <p>תשארו עד הסוף (:</p>
+                        <h4>בונוס מיוחד למי שנשאר עד הסוף</h4>
+                        <p>הכנו לכם משהו שיחסוך לכם שעות של עבודה. תשארו עד הסוף ותגלו 😉</p>
                     </div>
                 </div>
             </div>
@@ -927,8 +922,9 @@
                 { src: 'images.png', alt: 'BizAid' }
             ];
             const track = document.getElementById('logoTrack');
-            // Create 4 copies for seamless infinite loop
-            for (let copy = 0; copy < 4; copy++) {
+
+            // Create enough copies to fill screen + overflow
+            for (let copy = 0; copy < 6; copy++) {
                 logos.forEach(logo => {
                     const div = document.createElement('div');
                     div.className = 'logo-item';
@@ -936,6 +932,35 @@
                     track.appendChild(div);
                 });
             }
+
+            // JS-based smooth infinite scroll
+            let scrollPos = 0;
+            const speed = 0.5; // pixels per frame - slow and smooth
+            const gap = 40; // matches CSS gap (2.5rem ≈ 40px)
+
+            function getOneSetWidth() {
+                const items = track.querySelectorAll('.logo-item');
+                const itemsPerSet = logos.length;
+                let width = 0;
+                for (let i = 0; i < itemsPerSet; i++) {
+                    width += items[i].offsetWidth + gap;
+                }
+                return width;
+            }
+
+            let oneSetWidth = getOneSetWidth();
+            window.addEventListener('resize', () => { oneSetWidth = getOneSetWidth(); });
+
+            function animate() {
+                scrollPos += speed;
+                if (scrollPos >= oneSetWidth) {
+                    scrollPos -= oneSetWidth;
+                }
+                track.style.transform = 'translateX(' + (-scrollPos) + 'px)';
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
         })();
 
         // ===== SHOWCASE CAROUSEL =====
