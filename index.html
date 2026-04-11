@@ -462,6 +462,12 @@
             display: flex;
             gap: 2.5rem;
             width: max-content;
+            animation: logoScroll 25s linear infinite;
+        }
+
+        @keyframes logoScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .logo-item {
@@ -931,8 +937,7 @@
         reveals.forEach(el => observer.observe(el));
 
         // ===== LOGO INFINITE LOOP =====
-        // Approach: items scroll left. When an item fully exits left side,
-        // it gets moved to the end. True infinite recycling - never runs out.
+        // Pure CSS animation - 2 identical sets, translateX(-50%) = seamless loop
         (function() {
             const logos = [
                 { src: '2dc1ca6a-5314-4b98-b687-2fb11d080983.png', alt: 'ערוץ 12' },
@@ -944,42 +949,16 @@
                 { src: 'images.png', alt: 'BizAid' }
             ];
             const track = document.getElementById('logoTrack');
-            const gap = 40; // 2.5rem
 
-            // Fill track with enough logos to overflow the screen
-            for (let i = 0; i < 20; i++) {
-                const logo = logos[i % logos.length];
-                const div = document.createElement('div');
-                div.className = 'logo-item';
-                div.innerHTML = '<img src="' + logo.src + '" alt="' + logo.alt + '">';
-                track.appendChild(div);
+            // Create exactly 2 identical sets - CSS animates 0 to -50% for perfect loop
+            for (let copy = 0; copy < 2; copy++) {
+                logos.forEach(function(logo) {
+                    const div = document.createElement('div');
+                    div.className = 'logo-item';
+                    div.innerHTML = '<img src="' + logo.src + '" alt="' + logo.alt + '">';
+                    track.appendChild(div);
+                });
             }
-
-            let offset = 0;
-            const speed = 0.5;
-
-            // Start after images load - measure once, animate forever
-            window.addEventListener('load', function() {
-                // Pre-measure all item widths once
-                const items = track.querySelectorAll('.logo-item');
-                const widths = [];
-                items.forEach(function(item) { widths.push(item.offsetWidth + gap); });
-
-                let firstIndex = 0;
-
-                function tick() {
-                    offset += speed;
-                    if (offset >= widths[firstIndex % widths.length]) {
-                        offset -= widths[firstIndex % widths.length];
-                        track.appendChild(track.firstElementChild);
-                        firstIndex++;
-                    }
-                    track.style.transform = 'translateX(' + (-offset) + 'px)';
-                    requestAnimationFrame(tick);
-                }
-
-                requestAnimationFrame(tick);
-            });
         })();
 
         // ===== SHOWCASE CAROUSEL =====
