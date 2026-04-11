@@ -923,8 +923,8 @@
             ];
             const track = document.getElementById('logoTrack');
 
-            // Create enough copies to fill screen + overflow
-            for (let copy = 0; copy < 6; copy++) {
+            // Create 10 copies - enough for any screen size
+            for (let copy = 0; copy < 10; copy++) {
                 logos.forEach(logo => {
                     const div = document.createElement('div');
                     div.className = 'logo-item';
@@ -933,34 +933,23 @@
                 });
             }
 
-            // JS-based smooth infinite scroll
-            let scrollPos = 0;
-            const speed = 0.5; // pixels per frame - slow and smooth
-            const gap = 40; // matches CSS gap (2.5rem ≈ 40px)
-
-            function getOneSetWidth() {
-                const items = track.querySelectorAll('.logo-item');
+            // Wait for images to load then start animation
+            window.addEventListener('load', function() {
+                const gap = 40;
                 const itemsPerSet = logos.length;
-                let width = 0;
+                const items = track.querySelectorAll('.logo-item');
+                let oneSetWidth = 0;
                 for (let i = 0; i < itemsPerSet; i++) {
-                    width += items[i].offsetWidth + gap;
+                    oneSetWidth += items[i].offsetWidth + gap;
                 }
-                return width;
-            }
 
-            let oneSetWidth = getOneSetWidth();
-            window.addEventListener('resize', () => { oneSetWidth = getOneSetWidth(); });
+                // Create CSS animation dynamically based on actual width
+                const style = document.createElement('style');
+                style.textContent = '@keyframes seamlessScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-' + oneSetWidth + 'px); } }';
+                document.head.appendChild(style);
 
-            function animate() {
-                scrollPos += speed;
-                if (scrollPos >= oneSetWidth) {
-                    scrollPos -= oneSetWidth;
-                }
-                track.style.transform = 'translateX(' + (-scrollPos) + 'px)';
-                requestAnimationFrame(animate);
-            }
-
-            requestAnimationFrame(animate);
+                track.style.animation = 'seamlessScroll ' + (oneSetWidth / 30) + 's linear infinite';
+            });
         })();
 
         // ===== SHOWCASE CAROUSEL =====
