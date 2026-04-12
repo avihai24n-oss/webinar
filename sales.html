@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סטודיו בכיס — TODO AI Studio</title>
+    <meta name="description" content="למדו ליצור תמונות מוצר ברמת סטודיו עם AI — בלי צלם, בלי ציוד, תוך דקות">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-primary: #0F1117;
+            --bg-secondary: #161922;
+            --bg-card: #1C1F2B;
+            --accent-green: #A3E635;
+            --accent-gold: #F59E0B;
+            --accent-purple: #6C63FF;
+            --text-white: #FFFFFF;
+            --text-light: #D1D5DB;
+            --text-gray: #9CA3AF;
+            --border: rgba(255,255,255,0.08);
+            --radius: 14px;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 16px;
+            direction: rtl;
+            text-align: right;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-white);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(180deg, #0F1117 0%, #131620 50%, #0F1117 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(163,230,53,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(163,230,53,0.1);
+            border: 1px solid rgba(163,230,53,0.25);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            animation: pulse-badge 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(163,230,53,0.15); }
+            50% { box-shadow: 0 0 25px 5px rgba(163,230,53,0.1); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-white);
+            line-height: 1.25;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-green), #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Countdown */
+        .countdown-wrapper {
+            margin-bottom: 2.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.8rem;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            direction: ltr;
+        }
+
+        .cd-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .cd-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cd-lbl {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            margin-top: 2px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: var(--accent-green);
+            color: #0F1117;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: cta-pulse 2s ease-in-out infinite;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(163,230,53,0.25);
+        }
+
+        @keyframes cta-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(163,230,53,0.3); }
+            50% { box-shadow: 0 0 0 12px rgba(163,230,53,0); }
+        }
+
+        /* ===== RESULTS GALLERY ===== */
+        .gallery-section {
+            background: var(--bg-secondary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 30px rgba(163,230,53,0.08);
+            border-color: rgba(163,230,53,0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1a1d2e 0%, #252838 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            padding: 0.8rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        .gallery-more {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* ===== VIDEO SECTION ===== */
+        .video-section {
+            background: var(--bg-primary);
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-note {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 1.2rem;
+        }
+
+        /* ===== PRICING CARDS ===== */
+        .pricing-section {
+            background: var(--bg-secondary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .price-card.popular {
+            border-color: rgba(163,230,53,0.3);
+        }
+
+        .price-card.popular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), #4ade80);
+        }
+
+        .price-card.premium {
+            border-color: rgba(245,158,11,0.3);
+        }
+
+        .price-card.premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), #fbbf24);
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-badge.green {
+            background: rgba(163,230,53,0.12);
+            color: var(--accent-green);
+            border: 1px solid rgba(163,230,53,0.25);
+        }
+
+        .card-badge.gold {
+            background: rgba(245,158,11,0.12);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245,158,11,0.25);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.8rem;
+        }
+
+        .price-display {
+            margin-bottom: 1.5rem;
+        }
+
+        .price-original {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-white);
+            line-height: 1.1;
+        }
+
+        .price-current .currency {
+            font-size: 1.5rem;
+        }
+
+        .price-discount {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.8rem;
+            background: rgba(163,230,53,0.1);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-top: 0.3rem;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.5rem 0;
+            font-size: 0.92rem;
+            color: var(--text-light);
+        }
+
+        .features-list li .check {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            background: rgba(163,230,53,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            margin-top: 2px;
+        }
+
+        .price-card.premium .features-list li .check {
+            background: rgba(245,158,11,0.12);
+            color: var(--accent-gold);
+        }
+
+        .card-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card-cta.green {
+            background: var(--accent-green);
+            color: #0F1117;
+        }
+
+        .card-cta.green:hover {
+            box-shadow: 0 8px 30px rgba(163,230,53,0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-cta.gold {
+            background: var(--accent-gold);
+            color: #0F1117;
+        }
+
+        .card-cta.gold:hover {
+            box-shadow: 0 8px 30px rgba(245,158,11,0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-cta-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            margin-top: 0.8rem;
+        }
+
+        /* ===== SPEED BONUS ===== */
+        .bonus-section {
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .bonus-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(163,230,53,0.05) 0%, rgba(163,230,53,0.02) 100%);
+            border: 1px solid rgba(163,230,53,0.15);
+            border-radius: 18px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .bonus-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-card h2 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .bonus-card p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bonus-countdown {
+            margin-bottom: 2rem;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-section {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .about-img {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(163,230,53,0.2);
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.3rem;
+        }
+
+        .about-role {
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .about-bio {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .about-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            text-align: center;
+        }
+
+        .about-stat .num {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .about-stat .lbl {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            background: var(--bg-primary);
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-q {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.3rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-white);
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            direction: rtl;
+        }
+
+        .faq-q::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-right: auto;
+            margin-left: 0;
+            padding-left: 1rem;
+        }
+
+        .faq-item.open .faq-q::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding-bottom: 1.3rem;
+        }
+
+        .faq-a p {
+            font-size: 0.92rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta-section {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .final-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(163,230,53,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .final-cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .final-cta-section .section-sub {
+            margin-bottom: 2.5rem;
+        }
+
+        .final-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .final-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .final-btn.green {
+            background: var(--accent-green);
+            color: #0F1117;
+        }
+
+        .final-btn.green:hover {
+            box-shadow: 0 8px 30px rgba(163,230,53,0.3);
+            transform: translateY(-2px);
+        }
+
+        .final-btn.gold {
+            background: var(--accent-gold);
+            color: #0F1117;
+        }
+
+        .final-btn.gold:hover {
+            box-shadow: 0 8px 30px rgba(245,158,11,0.3);
+            transform: translateY(-2px);
+        }
+
+        .final-contact {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .final-contact a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        /* ===== STICKY MOBILE CTA ===== */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.8rem 1.2rem;
+            background: rgba(15,17,23,0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .sticky-cta a {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--accent-green);
+            color: #0F1117;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section { padding: 48px 0; }
+
+            .hero { padding: 80px 20px 60px; min-height: auto; }
+            .hero h1 { font-size: 2rem; }
+            .hero-sub { font-size: 1.05rem; }
+
+            h2 { font-size: 1.6rem; }
+
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+            .pricing-grid { grid-template-columns: 1fr; }
+            .price-card { padding: 2rem 1.5rem; }
+
+            .about-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-stats { justify-content: center; }
+
+            .bonus-card { padding: 2rem 1.5rem; }
+
+            .final-buttons { flex-direction: column; align-items: center; }
+            .final-btn { width: 100%; max-width: 320px; justify-content: center; }
+
+            .sticky-cta { display: block; }
+            .footer { padding-bottom: 5rem; }
+
+            .cd-item { min-width: 55px; padding: 0.6rem 0.7rem; }
+            .cd-num { font-size: 1.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .price-current { font-size: 2.5rem; }
+            .about-img { width: 140px; height: 140px; }
+            .about-stats { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 הצעה מיוחדת למשתתפי הוובינר</div>
+            <h1>הפסיקו לשלם אלפים <br>על <span>צילומי מוצר</span></h1>
+            <p class="hero-sub">למדו ליצור תמונות מוצר ברמת סטודיו עם AI — בלי צלם, בלי ציוד, תוך דקות</p>
+
+            <div class="countdown-wrapper">
+                <div class="countdown-label">ההצעה נסגרת בעוד:</div>
+                <div class="countdown" id="heroCountdown">
+                    <div class="cd-item"><div class="cd-num" id="cd-sec">00</div><div class="cd-lbl">שניות</div></div>
+                    <div class="cd-item"><div class="cd-num" id="cd-min">00</div><div class="cd-lbl">דקות</div></div>
+                    <div class="cd-item"><div class="cd-num" id="cd-hr">00</div><div class="cd-lbl">שעות</div></div>
+                </div>
+            </div>
+
+            <a href="#pricing" class="hero-cta">אני רוצה להתחיל ←</a>
+        </div>
+    </section>
+
+    <!-- ===== RESULTS GALLERY ===== -->
+    <section class="gallery-section fade-in">
+        <div class="container">
+            <h2>תוצאות שנוצרו עם AI — בלי צלם, בלי סטודיו</h2>
+            <p class="section-sub">התמונות והסרטונים נוצרו עם הכלים שתלמדו בקורס</p>
+
+            <div class="gallery-grid">
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 1 — צילום מוצר</div>
+                    <div class="gallery-caption">תמונת מוצר — נוצרה ב-AI</div>
+                </div>
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 2 — קוסמטיקה</div>
+                    <div class="gallery-caption">צילום מוצר טיפוח — נוצר ב-AI</div>
+                </div>
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 3 — אופנה</div>
+                    <div class="gallery-caption">דוגמנית AI — שמלה אמיתית</div>
+                </div>
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 4 — אוכל</div>
+                    <div class="gallery-caption">צילום מזון — נוצר ב-AI</div>
+                </div>
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 5 — תכשיטים</div>
+                    <div class="gallery-caption">צילום תכשיט — נוצר ב-AI</div>
+                </div>
+                <!-- REPLACE WITH YOUR IMAGE URL -->
+                <div class="gallery-card">
+                    <div class="gallery-img">תמונה 6 — נדל״ן</div>
+                    <div class="gallery-caption">הדמיית נכס — נוצרה ב-AI</div>
+                </div>
+            </div>
+
+            <p class="gallery-more">ועוד עשרות דוגמאות בקורס...</p>
+        </div>
+    </section>
+
+    <!-- ===== VIDEO SECTION ===== -->
+    <section class="video-section fade-in">
+        <div class="container">
+            <h2>תראו בעצמכם 🎬</h2>
+            <p class="section-sub">הסרטון הזה נוצר לחלוטין עם AI — בלי צלם, בלי דוגמנים</p>
+
+            <div class="video-container">
+                <!-- PASTE YOUR YOUTUBE EMBED CODE HERE -->
+                הטמיעו כאן סרטון YouTube
+            </div>
+
+            <p class="video-note">כל מה שראיתם — נוצר עם הכלים שתלמדו בקורס</p>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="pricing-section fade-in" id="pricing">
+        <div class="container">
+            <h2>מה כלול?</h2>
+            <p class="section-sub">בחרו את המסלול שמתאים לכם</p>
+
+            <div class="pricing-grid">
+                <!-- COURSE CARD -->
+                <div class="price-card popular">
+                    <span class="card-badge green">הכי פופולרי</span>
+                    <div class="card-title">סטודיו בכיס — הקורס</div>
+
+                    <div class="price-display">
+                        <div class="price-original">497 ₪</div>
+                        <div class="price-current">297 <span class="currency">₪</span></div>
+                        <div class="price-discount">הנחת וובינר — 40% הנחה</div>
+                        <div class="price-note">המחיר הזה תקף 48 שעות בלבד</div>
+                    </div>
+
+                    <ul class="features-list">
+                        <li><span class="check">✓</span>קורס מוקלט מלא — צעד אחרי צעד</li>
+                        <li><span class="check">✓</span>גישה לכל הפרומפטים והתבניות</li>
+                        <li><span class="check">✓</span>סוכן AI אישי לבניית פרומפטים</li>
+                        <li><span class="check">✓</span>גישה לקבוצת הוואטסאפ הפרימיום</li>
+                        <li><span class="check">✓</span>עדכונים ותכנים חדשים בחינם</li>
+                    </ul>
+
+                    <a href="https://course.todowith.ai/howto" class="card-cta green">לרכישת הקורס</a>
+                    <div class="card-cta-note">גישה מיידית לאחר הרכישה</div>
+                </div>
+
+                <!-- PREMIUM CARD -->
+                <div class="price-card premium">
+                    <span class="card-badge gold">פרימיום</span>
+                    <div class="card-title">ליווי אישי לפרויקטים ב-AI</div>
+
+                    <div class="price-display">
+                        <div class="price-current">1,800 <span class="currency">₪</span></div>
+                        <div class="price-period">לחודש (4 מפגשים של שעה וחצי)</div>
+                    </div>
+
+                    <ul class="features-list">
+                        <li><span class="check">✓</span>ליווי אישי אחד על אחד, מותאם לעסק שלכם</li>
+                        <li><span class="check">✓</span>עבודה ממוקדת על הפרויקט שלכם — מהרעיון לתוצאה</li>
+                        <li><span class="check">✓</span>הכוונה מקצועית בזמן אמת, דיוק ושיפור</li>
+                        <li><span class="check">✓</span>בניית פרומפטים מדויקים והתאמה אישית למוצרים</li>
+                        <li><span class="check">✓</span>שליטה מתקדמת בכלי AI תוך כדי עבודה בפועל</li>
+                        <li><span class="check">✓</span>מענה לשאלות והתמודדות עם אתגרים בצורה אישית</li>
+                    </ul>
+
+                    <a href="https://wa.me/972542064301" class="card-cta gold">לקביעת מפגש ראשון</a>
+                    <div class="card-cta-note">נחזור אליכם תוך 24 שעות</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SPEED BONUS ===== -->
+    <section class="bonus-section fade-in">
+        <div class="container">
+            <div class="bonus-card">
+                <div class="bonus-icon">🔥</div>
+                <h2>המחיר הזה לא יחזור</h2>
+                <p>הקורס ״סטודיו בכיס״ נמכר ב-497 ₪. רק למשתתפי הוובינר, רק ב-48 השעות הקרובות — 297 ₪ בלבד. אחרי שהטיימר נגמר, המחיר חוזר למחיר המלא.</p>
+
+                <div class="bonus-countdown">
+                    <div class="countdown" id="bonusCountdown">
+                        <div class="cd-item"><div class="cd-num" id="cd-sec2">00</div><div class="cd-lbl">שניות</div></div>
+                        <div class="cd-item"><div class="cd-num" id="cd-min2">00</div><div class="cd-lbl">דקות</div></div>
+                        <div class="cd-item"><div class="cd-num" id="cd-hr2">00</div><div class="cd-lbl">שעות</div></div>
+                    </div>
+                </div>
+
+                <a href="#pricing" class="hero-cta">לרכישה לפני שנגמר ←</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about-section fade-in">
+        <div class="container">
+            <h2>מי מלמד?</h2>
+
+            <div class="about-grid">
+                <div class="about-img">
+                    <!-- REPLACE WITH YOUR PROFILE IMAGE URL -->
+                    <img src="my photo.jpg" alt="אביחי אלנקווה">
+                </div>
+                <div class="about-text">
+                    <h3>אביחי אלנקווה</h3>
+                    <div class="about-role">מייסד שותף ומוביל תחום ה-AI ב-TODO AI Studio</div>
+                    <p class="about-bio">מייצר תוכן ויזואלי מבוסס בינה מלאכותית לחברות ומותגים ומלמד את התחום בהרצאות, סדנאות ושיעורים פרטיים. מוביל את אחד הערוצים הגדולים בישראל בתחום עם למעלה מ-50 אלף עוקבים ומיליוני צפיות.</p>
+
+                    <div class="about-stats">
+                        <div class="about-stat"><div class="num">50K+</div><div class="lbl">עוקבים</div></div>
+                        <div class="about-stat"><div class="num">מיליוני</div><div class="lbl">צפיות</div></div>
+                        <div class="about-stat"><div class="num">עשרות</div><div class="lbl">לקוחות עסקיים</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section fade-in">
+        <div class="container">
+            <h2>שאלות נפוצות</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q">צריך ניסיון קודם ב-AI?</button>
+                    <div class="faq-a"><p>לא. הקורס בנוי למתחילים מאפס.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">כמה זמן יש לי גישה לקורס?</button>
+                    <div class="faq-a"><p>גישה ללא הגבלת זמן.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">מתי מתחילים?</button>
+                    <div class="faq-a"><p>מיד אחרי הרכישה. הגישה אוטומטית.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">אפשר לשלם בתשלומים?</button>
+                    <div class="faq-a"><p>צרו איתנו קשר בוואטסאפ ונסדר.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">זה מתאים לכל סוג עסק?</button>
+                    <div class="faq-a"><p>כן. מוצרים פיזיים, שירותים, קוסמטיקה, אופנה, אוכל — הכל.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta-section fade-in">
+        <div class="container">
+            <h2>מוכנים להפסיק לשלם לצלמים?</h2>
+            <p class="section-sub">הצטרפו לעשרות בעלי עסקים שכבר עובדים עם AI</p>
+
+            <div class="final-buttons">
+                <a href="https://course.todowith.ai/howto" class="final-btn green">לרכישת הקורס — 297 ₪</a>
+                <a href="https://wa.me/972542064301" class="final-btn gold">ליווי אישי — 1,800 ₪/חודש</a>
+            </div>
+
+            <p class="final-contact">שאלות? דברו איתנו: <a href="https://wa.me/972542064301">054-2064301</a> 💬</p>
+        </div>
+    </section>
+
+    <!-- ===== STICKY MOBILE CTA ===== -->
+    <div class="sticky-cta">
+        <a href="#pricing">לרכישת הקורס — 297 ₪ בלבד</a>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">TODO AI Studio</div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/todoai.il/" target="_blank">@todoai.il</a>
+                <a href="https://chat.whatsapp.com/Ev4cBslKwkw85u5gwadWsg" target="_blank">קהילת וואטסאפ</a>
+                <a href="https://course.todowith.ai/howto" target="_blank">course.todowith.ai</a>
+            </div>
+            <p class="footer-copy">© 2026 TODO AI Studio. כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== COUNTDOWN TIMER (48h from first visit) =====
+        const TIMER_KEY = 'webinar_offer_start';
+        let startTime = localStorage.getItem(TIMER_KEY);
+        if (!startTime) {
+            startTime = Date.now();
+            localStorage.setItem(TIMER_KEY, startTime);
+        }
+        const endTime = parseInt(startTime) + (48 * 60 * 60 * 1000);
+
+        function updateTimers() {
+            const now = Date.now();
+            const diff = Math.max(0, endTime - now);
+
+            const hrs = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const h = String(hrs).padStart(2, '0');
+            const m = String(mins).padStart(2, '0');
+            const s = String(secs).padStart(2, '0');
+
+            // Hero countdown
+            document.getElementById('cd-hr').textContent = h;
+            document.getElementById('cd-min').textContent = m;
+            document.getElementById('cd-sec').textContent = s;
+
+            // Bonus countdown
+            document.getElementById('cd-hr2').textContent = h;
+            document.getElementById('cd-min2').textContent = m;
+            document.getElementById('cd-sec2').textContent = s;
+
+            if (diff <= 0) {
+                document.querySelectorAll('.countdown-label').forEach(function(el) {
+                    el.textContent = 'ההצעה הסתיימה';
+                });
+            }
+        }
+
+        updateTimers();
+        setInterval(updateTimers, 1000);
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== FAQ ACCORDION =====
+        document.querySelectorAll('.faq-q').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+                // Open clicked if it was closed
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // ===== FADE IN ON SCROLL =====
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
