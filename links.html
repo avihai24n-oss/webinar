@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TODO AI — לינקים</title>
+    <meta name="description" content="TODO AI Studio — בואו לקחת את העסק שלכם שלב אחד קדימה!">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0B0D14;
+            --card: rgba(255,255,255,0.06);
+            --card-hover: rgba(255,255,255,0.10);
+            --border: rgba(255,255,255,0.08);
+            --accent: #A3E635;
+            --accent2: #06b6d4;
+            --white: #FFFFFF;
+            --gray: #9CA3AF;
+            --light: #D1D5DB;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            min-height: 100vh;
+            direction: rtl;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(163,230,53,0.08) 0%, rgba(6,182,212,0.04) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgFloat 8s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgFloat2 10s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(30px); }
+        }
+
+        @keyframes bgFloat2 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 3rem 1.2rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== PROFILE ===== */
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid rgba(163,230,53,0.3);
+            box-shadow: 0 0 30px rgba(163,230,53,0.1);
+            position: relative;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--white), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-bio {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Social icons row */
+        .social-icons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--light);
+        }
+
+        /* ===== LINKS ===== */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(163,230,53,0.03) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .link-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border-color: rgba(163,230,53,0.15);
+        }
+
+        .link-card:hover::before {
+            opacity: 1;
+        }
+
+        .link-card:active {
+            transform: scale(0.98);
+        }
+
+        .link-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .link-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .link-sub {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .link-arrow {
+            color: var(--gray);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-arrow {
+            transform: translateX(-4px);
+        }
+
+        /* Specific icon colors */
+        .icon-webinar {
+            background: linear-gradient(135deg, rgba(163,230,53,0.15), rgba(163,230,53,0.05));
+            color: var(--accent);
+        }
+
+        .icon-course {
+            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.05));
+            color: #818cf8;
+        }
+
+        .icon-whatsapp {
+            background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05));
+            color: #25d366;
+        }
+
+        .icon-instagram {
+            background: linear-gradient(135deg, rgba(225,48,108,0.15), rgba(225,48,108,0.05));
+            color: #e1306c;
+        }
+
+        .icon-contact {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(6,182,212,0.05));
+            color: var(--accent2);
+        }
+
+        .icon-youtube {
+            background: linear-gradient(135deg, rgba(255,0,0,0.15), rgba(255,0,0,0.05));
+            color: #ff0000;
+        }
+
+        /* ===== FEATURED BADGE ===== */
+        .featured .link-card {
+            border-color: rgba(163,230,53,0.2);
+            background: linear-gradient(135deg, rgba(163,230,53,0.06) 0%, rgba(163,230,53,0.02) 100%);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #0B0D14;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.15rem 0.6rem;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .footer-brand {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        /* ===== FADE IN ANIMATION ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .links .link-card:nth-child(1) { animation-delay: 0.1s; }
+        .links .link-card:nth-child(2) { animation-delay: 0.18s; }
+        .links .link-card:nth-child(3) { animation-delay: 0.26s; }
+        .links .link-card:nth-child(4) { animation-delay: 0.34s; }
+        .links .link-card:nth-child(5) { animation-delay: 0.42s; }
+        .links .link-card:nth-child(6) { animation-delay: 0.50s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .container {
+                padding-top: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Profile -->
+        <div class="profile fade-up">
+            <div class="avatar">
+                <!-- REPLACE WITH YOUR LOGO OR PHOTO -->
+                <img src="my photo.jpg" alt="TODO AI">
+            </div>
+            <div class="profile-name">TODO AI</div>
+            <p class="profile-bio">בואו לקחת את העסק שלכם שלב אחד קדימה!</p>
+
+            <div class="social-icons">
+                <a href="https://www.instagram.com/todoai.il/" target="_blank" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="https://chat.whatsapp.com/Ev4cBslKwkw85u5gwadWsg" target="_blank" class="social-icon" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="links">
+
+            <!-- Webinar - Featured -->
+            <div class="featured">
+                <a href="https://avihai24n-oss.github.io/webinar/register.html" target="_blank" class="link-card fade-up">
+                    <span class="featured-badge">חדש!</span>
+                    <div class="link-icon icon-webinar">🎥</div>
+                    <div class="link-text">
+                        <div class="link-title">וובינר חינמי — יצירת תוכן עם AI</div>
+                        <div class="link-sub">יום רביעי 15.4 | 20:00 | הרשמה בחינם</div>
+                    </div>
+                    <span class="link-arrow">←</span>
+                </a>
+            </div>
+
+            <!-- Course -->
+            <a href="https://course.todowith.ai/howto" target="_blank" class="link-card fade-up">
+                <div class="link-icon icon-course">📚</div>
+                <div class="link-text">
+                    <div class="link-title">קורס — סטודיו בכיס</div>
+                    <div class="link-sub">למדו ליצור תמונות מוצר ברמת סטודיו עם AI</div>
+                </div>
+                <span class="link-arrow">←</span>
+            </a>
+
+            <!-- WhatsApp Group -->
+            <a href="https://chat.whatsapp.com/Ev4cBslKwkw85u5gwadWsg" target="_blank" class="link-card fade-up">
+                <div class="link-icon icon-whatsapp">💬</div>
+                <div class="link-text">
+                    <div class="link-title">קבוצת הוואטסאפ — עדכונים וטיפים</div>
+                    <div class="link-sub">הצטרפו בחינם לקהילה</div>
+                </div>
+                <span class="link-arrow">←</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/todoai.il/" target="_blank" class="link-card fade-up">
+                <div class="link-icon icon-instagram">📸</div>
+                <div class="link-text">
+                    <div class="link-title">עקבו אחרינו באינסטגרם</div>
+                    <div class="link-sub">@todoai.il — תוכן, טיפים ודוגמאות</div>
+                </div>
+                <span class="link-arrow">←</span>
+            </a>
+
+            <!-- Contact -->
+            <a href="https://wa.me/972542064301" target="_blank" class="link-card fade-up">
+                <div class="link-icon icon-contact">📞</div>
+                <div class="link-text">
+                    <div class="link-title">צור קשר</div>
+                    <div class="link-sub">054-2064301 — וואטסאפ / טלפון</div>
+                </div>
+                <span class="link-arrow">←</span>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer fade-up" style="animation-delay: 0.6s;">
+            <div class="footer-brand">TODO <span>AI</span> Studio</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
