@@ -1022,5 +1022,44 @@
             observer.observe(container, { childList: true, subtree: true });
         });
     </script>
+
+    <!-- ===== META PIXEL CUSTOM EVENTS ===== -->
+    <script>
+        // 1. VIDEO PLAY TRACKING
+        // Listen for clicks on YouTube iframes (user clicking play)
+        document.querySelectorAll('iframe[src*="youtube"]').forEach(function(iframe) {
+            iframe.addEventListener('mousedown', function() {
+                fbq('trackCustom', 'VideoPlay', { video: this.src });
+            }, { once: true });
+        });
+
+        // 2. TIME ON PAGE TRACKING
+        // Fire events at 30s, 60s, 120s, 300s
+        var timeMarkers = [30, 60, 120, 300];
+        var firedMarkers = {};
+        setInterval(function() {
+            var elapsed = Math.floor((Date.now() - performance.timeOrigin) / 1000);
+            timeMarkers.forEach(function(sec) {
+                if (elapsed >= sec && !firedMarkers[sec]) {
+                    firedMarkers[sec] = true;
+                    fbq('trackCustom', 'TimeOnPage', { seconds: sec });
+                }
+            });
+        }, 5000);
+
+        // 3. SCROLL TO BOTTOM TRACKING
+        var scrolledToBottom = false;
+        window.addEventListener('scroll', function() {
+            if (scrolledToBottom) return;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight;
+            var winHeight = window.innerHeight;
+            // Fire when user reaches 90% of page
+            if ((scrollTop + winHeight) / docHeight >= 0.9) {
+                scrolledToBottom = true;
+                fbq('trackCustom', 'ScrollToBottom');
+            }
+        });
+    </script>
 </body>
 </html>
