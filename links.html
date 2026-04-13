@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TODO AI — לינקים</title>
-    <meta name="description" content="TODO AI Studio — בואו לקחת את העסק שלכם שלב אחד קדימה!">
+    <meta name="description" content="TODO AI Studio — המקפצה שלך עם בינה מלאכותית">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -32,18 +32,14 @@
             overflow-x: hidden;
         }
 
-        /* ===== NEURAL NETWORK CANVAS ===== */
         #neuralBg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* ===== CONTAINER ===== */
         .container {
             max-width: 440px;
             margin: 0 auto;
@@ -53,267 +49,189 @@
         }
 
         /* ===== PROFILE ===== */
-        .profile {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        .profile { text-align: center; margin-bottom: 2rem; }
 
         .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 110px; height: 110px;
+            border-radius: 50%; overflow: hidden;
             margin: 0 auto 1rem;
             border: 3px solid rgba(163,230,53,0.3);
             box-shadow: 0 0 30px rgba(163,230,53,0.1);
             position: relative;
         }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
         .avatar::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 2px solid transparent;
+            content: ''; position: absolute; inset: -3px;
+            border-radius: 50%; border: 2px solid transparent;
             background: linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
             mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            -webkit-mask-composite: xor;
+            mask-composite: exclude; -webkit-mask-composite: xor;
         }
 
         .profile-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.3rem;
+            font-size: 1.5rem; font-weight: 800; margin-bottom: 0.3rem;
             background: linear-gradient(135deg, var(--white), var(--light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
+        .profile-bio { font-size: 0.95rem; color: var(--gray); line-height: 1.5; margin-bottom: 1rem; }
 
-        .profile-bio {
-            font-size: 0.95rem;
-            color: var(--gray);
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        /* Social icons row */
-        .social-icons {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-        }
-
+        .social-icons { display: flex; gap: 0.8rem; justify-content: center; }
         .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--card);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--card); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: all 0.3s ease;
         }
-
-        .social-icon:hover {
-            background: var(--card-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .social-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--light);
-        }
+        .social-icon:hover { background: var(--card-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        .social-icon svg { width: 18px; height: 18px; fill: var(--light); }
 
         /* ===== LINKS ===== */
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
+        .links { display: flex; flex-direction: column; gap: 0.8rem; }
+
+        .link-wrapper { position: relative; }
 
         .link-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            display: flex; align-items: center; gap: 1rem;
             padding: 1rem 1.2rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            text-decoration: none;
-            color: var(--white);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; text-decoration: none; color: var(--white);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+            cursor: pointer;
         }
-
         .link-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(163,230,53,0.03) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0; transition: opacity 0.3s ease;
         }
+        .link-card:hover { background: var(--card-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); border-color: rgba(163,230,53,0.15); }
+        .link-card:hover::before { opacity: 1; }
+        .link-card:active { transform: scale(0.98); }
 
-        .link-card:hover {
-            background: var(--card-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            border-color: rgba(163,230,53,0.15);
-        }
-
-        .link-card:hover::before {
-            opacity: 1;
-        }
-
-        .link-card:active {
-            transform: scale(0.98);
-        }
-
-        .link-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.3rem;
-        }
-
-        .link-text {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .link-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-        }
-
-        .link-sub {
-            font-size: 0.75rem;
-            color: var(--gray);
-        }
-
-        .link-arrow {
-            color: var(--gray);
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .link-card:hover .link-arrow {
-            transform: translateX(-4px);
-        }
-
-        /* Specific icon colors */
-        .icon-webinar {
-            background: linear-gradient(135deg, rgba(163,230,53,0.15), rgba(163,230,53,0.05));
-            color: var(--accent);
-        }
-
-        .icon-course {
-            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.05));
-            color: #818cf8;
-        }
-
-        .icon-whatsapp {
-            background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05));
-            color: #25d366;
-        }
-
-        .icon-instagram {
-            background: linear-gradient(135deg, rgba(225,48,108,0.15), rgba(225,48,108,0.05));
-            color: #e1306c;
-        }
-
-        .icon-contact {
-            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(6,182,212,0.05));
-            color: var(--accent2);
-        }
-
-        .icon-youtube {
-            background: linear-gradient(135deg, rgba(255,0,0,0.15), rgba(255,0,0,0.05));
-            color: #ff0000;
-        }
-
-        /* ===== FEATURED BADGE ===== */
-        .featured .link-card {
+        .link-card.featured-card {
             border-color: rgba(163,230,53,0.2);
             background: linear-gradient(135deg, rgba(163,230,53,0.06) 0%, rgba(163,230,53,0.02) 100%);
         }
 
         .featured-badge {
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: #0B0D14;
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 0.15rem 0.6rem;
-            border-radius: 0 0 8px 8px;
+            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: #0B0D14;
+            font-size: 0.6rem; font-weight: 700;
+            padding: 0.15rem 0.6rem; border-radius: 0 0 8px 8px;
         }
 
-        /* ===== FOOTER ===== */
-        .footer {
+        .link-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 1.3rem;
+            background: linear-gradient(135deg, rgba(163,230,53,0.12), rgba(163,230,53,0.04));
+        }
+        .link-text { flex: 1; position: relative; z-index: 1; }
+        .link-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
+        .link-sub { font-size: 0.75rem; color: var(--gray); }
+        .link-arrow { color: var(--gray); font-size: 0.9rem; position: relative; z-index: 1; transition: transform 0.3s ease; }
+        .link-card:hover .link-arrow { transform: translateX(-4px); }
+
+        /* ===== ADMIN ===== */
+        .admin-bar {
+            display: none;
+            background: rgba(163,230,53,0.1);
+            border: 1px solid rgba(163,230,53,0.3);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
             text-align: center;
-            margin-top: 2.5rem;
-            padding-bottom: 1rem;
         }
+        .admin-bar.show { display: block; }
+        .admin-bar span { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
 
-        .footer-brand {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--gray);
-            letter-spacing: 1px;
-        }
-
-        .footer-brand span {
+        .click-count {
+            display: none;
+            position: absolute;
+            top: 8px; left: 8px;
+            background: rgba(163,230,53,0.15);
+            border: 1px solid rgba(163,230,53,0.3);
+            border-radius: 8px;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.65rem;
             color: var(--accent);
+            font-weight: 700;
+            z-index: 5;
         }
+        body.admin-mode .click-count { display: block; }
 
-        /* ===== FADE IN ANIMATION ===== */
+        .admin-actions {
+            display: none;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+        body.admin-mode .admin-actions { display: flex; }
+
+        .admin-btn {
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--light);
+            font-size: 0.7rem;
+            font-family: 'Heebo', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .admin-btn:hover { background: var(--card-hover); }
+        .admin-btn.danger { border-color: rgba(239,68,68,0.3); color: #f87171; }
+        .admin-btn.danger:hover { background: rgba(239,68,68,0.1); }
+
+        /* Edit modal */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            align-items: center; justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+
+        .modal {
+            background: #1C1F2B;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+            width: 90%; max-width: 400px;
+            direction: rtl;
+        }
+        .modal h3 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--white); }
+        .modal label { font-size: 0.8rem; color: var(--gray); display: block; margin-bottom: 0.3rem; margin-top: 0.8rem; }
+        .modal input, .modal select {
+            width: 100%; padding: 0.6rem 0.8rem;
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--white);
+            font-family: 'Heebo', sans-serif; font-size: 0.9rem;
+            direction: rtl;
+        }
+        .modal input:focus { outline: none; border-color: var(--accent); }
+
+        .modal-buttons { display: flex; gap: 0.5rem; margin-top: 1.5rem; }
+        .modal-btn {
+            flex: 1; padding: 0.7rem;
+            border-radius: 10px; border: none;
+            font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .modal-btn.save { background: var(--accent); color: #0B0D14; }
+        .modal-btn.save:hover { box-shadow: 0 4px 15px rgba(163,230,53,0.3); }
+        .modal-btn.cancel { background: var(--card); color: var(--light); border: 1px solid var(--border); }
+
+        .footer { text-align: center; margin-top: 2.5rem; padding-bottom: 1rem; }
+        .footer-brand { font-size: 0.8rem; font-weight: 700; color: var(--gray); letter-spacing: 1px; }
+        .footer-brand span { color: var(--accent); }
+
         .fade-up {
-            opacity: 0;
-            transform: translateY(15px);
+            opacity: 0; transform: translateY(15px);
             animation: fadeUp 0.5s ease forwards;
         }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .links .link-card:nth-child(1) { animation-delay: 0.1s; }
-        .links .link-card:nth-child(2) { animation-delay: 0.18s; }
-        .links .link-card:nth-child(3) { animation-delay: 0.26s; }
-        .links .link-card:nth-child(4) { animation-delay: 0.34s; }
-        .links .link-card:nth-child(5) { animation-delay: 0.42s; }
-        .links .link-card:nth-child(6) { animation-delay: 0.50s; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (min-width: 768px) {
-            .container {
-                padding-top: 4rem;
-            }
-        }
+        @media (min-width: 768px) { .container { padding-top: 4rem; } }
     </style>
 </head>
 <body>
@@ -321,7 +239,6 @@
     <canvas id="neuralBg"></canvas>
 
     <div class="container">
-
         <!-- Profile -->
         <div class="profile fade-up">
             <div class="avatar">
@@ -329,7 +246,6 @@
             </div>
             <div class="profile-name">TODO AI STUDIO</div>
             <p class="profile-bio">המקפצה שלך עם בינה מלאכותית</p>
-
             <div class="social-icons">
                 <a href="https://www.instagram.com/todoai.il/" target="_blank" class="social-icon" aria-label="Instagram">
                     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -340,90 +256,218 @@
             </div>
         </div>
 
-        <!-- Links -->
-        <div class="links">
-
-            <!-- Webinar - Featured -->
-            <div class="featured">
-                <a href="https://avihai24n-oss.github.io/webinar/register.html" target="_blank" class="link-card fade-up">
-                    <span class="featured-badge">חדש!</span>
-                    <div class="link-icon icon-webinar">🎥</div>
-                    <div class="link-text">
-                        <div class="link-title">וובינר חינמי — יצירת תוכן עם AI</div>
-                        <div class="link-sub">יום רביעי 15.4 | 20:00 | הרשמה בחינם</div>
-                    </div>
-                    <span class="link-arrow">←</span>
-                </a>
-            </div>
-
-            <!-- Course -->
-            <a href="https://course.todowith.ai/howto" target="_blank" class="link-card fade-up">
-                <div class="link-icon icon-course">📚</div>
-                <div class="link-text">
-                    <div class="link-title">קורס — סטודיו בכיס</div>
-                    <div class="link-sub">למדו ליצור תמונות מוצר ברמת סטודיו עם AI</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
-            <!-- WhatsApp Group -->
-            <a href="https://chat.whatsapp.com/Ev4cBslKwkw85u5gwadWsg" target="_blank" class="link-card fade-up">
-                <div class="link-icon icon-whatsapp">💬</div>
-                <div class="link-text">
-                    <div class="link-title">קבוצת הוואטסאפ — עדכונים וטיפים</div>
-                    <div class="link-sub">הצטרפו בחינם לקהילה</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
-            <!-- AI App -->
-            <a href="https://app.todowith.ai/" target="_blank" class="link-card fade-up">
-                <div class="link-icon" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); color: #a78bfa;">🤖</div>
-                <div class="link-text">
-                    <div class="link-title">יצירת תוכן עם AI — התחילו עכשיו</div>
-                    <div class="link-sub">הפלטפורמה שלנו ליצירת תמונות וסרטונים עם בינה מלאכותית</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
-            <!-- Website -->
-            <a href="https://todowith.ai/" target="_blank" class="link-card fade-up">
-                <div class="link-icon" style="background: linear-gradient(135deg, rgba(163,230,53,0.15), rgba(6,182,212,0.05)); color: var(--accent);">🌐</div>
-                <div class="link-text">
-                    <div class="link-title">האתר שלנו — todowith.ai</div>
-                    <div class="link-sub">סדנאות, הרצאות ופתרונות AI מותאמים לעסקים</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
-            <!-- Contact -->
-            <a href="https://wa.me/972542064301" target="_blank" class="link-card fade-up">
-                <div class="link-icon icon-contact">📞</div>
-                <div class="link-text">
-                    <div class="link-title">צור קשר</div>
-                    <div class="link-sub">054-2064301 — וואטסאפ / טלפון</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
-            <!-- Instagram - Bottom -->
-            <a href="https://www.instagram.com/todoai.il/" target="_blank" class="link-card fade-up">
-                <div class="link-icon icon-instagram">📸</div>
-                <div class="link-text">
-                    <div class="link-title">עקבו אחרינו באינסטגרם</div>
-                    <div class="link-sub">@todoai.il — תוכן, טיפים ודוגמאות</div>
-                </div>
-                <span class="link-arrow">←</span>
-            </a>
-
+        <!-- Admin Bar -->
+        <div class="admin-bar" id="adminBar">
+            <span>🔒 מצב מנהל — הקליקים והעריכה גלויים</span>
         </div>
 
-        <!-- Footer -->
+        <!-- Links loaded from Supabase -->
+        <div class="links" id="linksContainer">
+            <div style="text-align:center; color: var(--gray); padding: 2rem;">טוען...</div>
+        </div>
+
         <div class="footer fade-up" style="animation-delay: 0.6s;">
             <div class="footer-brand">TODO <span>AI</span> Studio</div>
         </div>
-
     </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h3 id="modalTitle">עריכת לינק</h3>
+            <input type="hidden" id="editId">
+            <label>כותרת</label>
+            <input type="text" id="editTitle">
+            <label>תיאור</label>
+            <input type="text" id="editSubtitle">
+            <label>קישור (URL)</label>
+            <input type="text" id="editUrl" dir="ltr" style="text-align:left;">
+            <label>אייקון (אמוג'י)</label>
+            <input type="text" id="editIcon" style="text-align:center;">
+            <label>מודגש?</label>
+            <select id="editFeatured">
+                <option value="false">לא</option>
+                <option value="true">כן — מודגש</option>
+            </select>
+            <label>גלוי?</label>
+            <select id="editVisible">
+                <option value="true">כן — גלוי לכולם</option>
+                <option value="false">לא — מוסתר</option>
+            </select>
+            <div class="modal-buttons">
+                <button class="modal-btn save" onclick="saveEdit()">שמור</button>
+                <button class="modal-btn cancel" onclick="closeModal()">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1575805190328083');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1575805190328083&ev=PageView&noscript=1"/></noscript>
+
+    <script>
+    // ===== SUPABASE CONFIG =====
+    const SUPABASE_URL = 'https://vvsvbiudqzislexwzzlk.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_DgRq2Y7vcF1qmqzejq9ynA_hTh8Nly7';
+    const ADMIN_PASS = '\u05dc\u05de\u05e0\u05d4\u05dc\u05d9\u05dd_\u05d1\u05dc\u05d1\u05d3_060965';
+
+    // Check admin mode
+    const params = new URLSearchParams(window.location.search);
+    const isAdmin = params.get('admin') === ADMIN_PASS;
+
+    if (isAdmin) {
+        document.body.classList.add('admin-mode');
+        document.getElementById('adminBar').classList.add('show');
+    }
+
+    // Supabase REST helper
+    async function sbFetch(table, method, body, filters) {
+        let url = SUPABASE_URL + '/rest/v1/' + table;
+        if (filters) url += '?' + filters;
+        const opts = {
+            method: method || 'GET',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + SUPABASE_KEY,
+                'Content-Type': 'application/json',
+                'Prefer': method === 'POST' ? 'return=representation' : (method === 'PATCH' ? 'return=representation' : '')
+            }
+        };
+        if (body) opts.body = JSON.stringify(body);
+        const res = await fetch(url, opts);
+        if (method === 'DELETE') return true;
+        return res.json();
+    }
+
+    // Load links
+    async function loadLinks() {
+        const container = document.getElementById('linksContainer');
+        try {
+            let filters = 'order=sort_order.asc';
+            if (!isAdmin) filters += '&visible=eq.true';
+            const links = await sbFetch('linktree_links', 'GET', null, filters);
+
+            // Get click counts if admin
+            let clickCounts = {};
+            if (isAdmin) {
+                const clicks = await sbFetch('linktree_clicks', 'GET', null, 'select=link_id');
+                clicks.forEach(function(c) {
+                    clickCounts[c.link_id] = (clickCounts[c.link_id] || 0) + 1;
+                });
+            }
+
+            container.innerHTML = '';
+
+            links.forEach(function(link, i) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'link-wrapper';
+                wrapper.style.animationDelay = (i * 0.08) + 's';
+
+                const opacity = (!link.visible && isAdmin) ? 'opacity: 0.4;' : '';
+
+                wrapper.innerHTML =
+                    '<a href="' + link.url + '" target="_blank" class="link-card fade-up ' + (link.featured ? 'featured-card' : '') + '" ' +
+                    'data-id="' + link.id + '" style="animation-delay:' + (i * 0.08) + 's;' + opacity + '">' +
+                        (link.featured ? '<span class="featured-badge">\u05d7\u05d3\u05e9!</span>' : '') +
+                        '<span class="click-count" id="clicks-' + link.id + '">' + (clickCounts[link.id] || 0) + ' \u05e7\u05dc\u05d9\u05e7\u05d9\u05dd</span>' +
+                        '<div class="link-icon">' + link.icon + '</div>' +
+                        '<div class="link-text">' +
+                            '<div class="link-title">' + link.title + '</div>' +
+                            (link.subtitle ? '<div class="link-sub">' + link.subtitle + '</div>' : '') +
+                        '</div>' +
+                        '<span class="link-arrow">\u2190</span>' +
+                    '</a>' +
+                    '<div class="admin-actions">' +
+                        '<button class="admin-btn" onclick="openEdit(' + link.id + ')">\u270f\ufe0f \u05e2\u05e8\u05d9\u05db\u05d4</button>' +
+                        '<button class="admin-btn" onclick="toggleVisible(' + link.id + ', ' + link.visible + ')">' +
+                            (link.visible ? '\ud83d\udeab \u05d4\u05e1\u05ea\u05e8' : '\u2705 \u05d4\u05e6\u05d2') +
+                        '</button>' +
+                    '</div>';
+
+                container.appendChild(wrapper);
+            });
+
+            // Click tracking for all links
+            container.querySelectorAll('.link-card[data-id]').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    const linkId = parseInt(this.getAttribute('data-id'));
+                    // Track in Supabase
+                    sbFetch('linktree_clicks', 'POST', { link_id: linkId });
+                    // Track in Meta Pixel
+                    var title = this.querySelector('.link-title').textContent;
+                    fbq('trackCustom', 'LinkClick', { link: title });
+                });
+            });
+
+        } catch (err) {
+            container.innerHTML = '<div style="text-align:center;color:#f87171;padding:2rem;">\u05e9\u05d2\u05d9\u05d0\u05d4 \u05d1\u05d8\u05e2\u05d9\u05e0\u05d4</div>';
+            console.error(err);
+        }
+    }
+
+    // Edit modal
+    let allLinks = [];
+
+    async function openEdit(id) {
+        event.preventDefault();
+        event.stopPropagation();
+        const links = await sbFetch('linktree_links', 'GET', null, 'id=eq.' + id);
+        const link = links[0];
+        document.getElementById('editId').value = link.id;
+        document.getElementById('editTitle').value = link.title;
+        document.getElementById('editSubtitle').value = link.subtitle || '';
+        document.getElementById('editUrl').value = link.url;
+        document.getElementById('editIcon').value = link.icon;
+        document.getElementById('editFeatured').value = String(link.featured);
+        document.getElementById('editVisible').value = String(link.visible);
+        document.getElementById('editModal').classList.add('show');
+    }
+
+    async function saveEdit() {
+        const id = document.getElementById('editId').value;
+        await sbFetch('linktree_links', 'PATCH', {
+            title: document.getElementById('editTitle').value,
+            subtitle: document.getElementById('editSubtitle').value,
+            url: document.getElementById('editUrl').value,
+            icon: document.getElementById('editIcon').value,
+            featured: document.getElementById('editFeatured').value === 'true',
+            visible: document.getElementById('editVisible').value === 'true'
+        }, 'id=eq.' + id);
+        closeModal();
+        loadLinks();
+    }
+
+    async function toggleVisible(id, currentState) {
+        event.preventDefault();
+        event.stopPropagation();
+        await sbFetch('linktree_links', 'PATCH', { visible: !currentState }, 'id=eq.' + id);
+        loadLinks();
+    }
+
+    function closeModal() {
+        document.getElementById('editModal').classList.remove('show');
+    }
+
+    // Close modal on overlay click
+    document.getElementById('editModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // Load on start
+    loadLinks();
+    </script>
 
     <script>
     // ===== NEURAL NETWORK BACKGROUND =====
@@ -436,92 +480,57 @@
         const CONNECTION_DIST = 160;
         const SPEED = 0.3;
 
-        function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-        }
+        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
 
         function createNodes() {
             nodes = [];
             for (let i = 0; i < NODE_COUNT; i++) {
                 nodes.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * SPEED,
-                    vy: (Math.random() - 0.5) * SPEED,
-                    r: Math.random() * 1.5 + 0.5,
-                    pulse: Math.random() * Math.PI * 2
+                    x: Math.random() * w, y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * SPEED, vy: (Math.random() - 0.5) * SPEED,
+                    r: Math.random() * 1.5 + 0.5, pulse: Math.random() * Math.PI * 2
                 });
             }
         }
 
         function draw() {
             ctx.clearRect(0, 0, w, h);
-
-            // Update positions
             for (let i = 0; i < nodes.length; i++) {
                 const n = nodes[i];
-                n.x += n.vx;
-                n.y += n.vy;
-                n.pulse += 0.015;
-
-                // Bounce off edges
+                n.x += n.vx; n.y += n.vy; n.pulse += 0.015;
                 if (n.x < 0 || n.x > w) n.vx *= -1;
                 if (n.y < 0 || n.y > h) n.vy *= -1;
-
-                // Keep in bounds
                 n.x = Math.max(0, Math.min(w, n.x));
                 n.y = Math.max(0, Math.min(h, n.y));
             }
-
-            // Draw connections
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const dx = nodes[i].x - nodes[j].x;
                     const dy = nodes[i].y - nodes[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
                     if (dist < CONNECTION_DIST) {
-                        const alpha = (1 - dist / CONNECTION_DIST) * 0.12;
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
                         ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = 'rgba(59, 130, 246, ' + alpha + ')';
+                        ctx.strokeStyle = 'rgba(59, 130, 246, ' + ((1 - dist / CONNECTION_DIST) * 0.12) + ')';
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
             }
-
-            // Draw nodes
             for (let i = 0; i < nodes.length; i++) {
                 const n = nodes[i];
                 const glow = 0.3 + Math.sin(n.pulse) * 0.15;
-
-                // Glow
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(59, 130, 246, ' + (glow * 0.08) + ')';
-                ctx.fill();
-
-                // Node
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(96, 165, 250, ' + glow + ')';
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(59, 130, 246, ' + (glow * 0.08) + ')'; ctx.fill();
+                ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(96, 165, 250, ' + glow + ')'; ctx.fill();
             }
-
             requestAnimationFrame(draw);
         }
 
-        resize();
-        createNodes();
-        draw();
-
-        window.addEventListener('resize', function() {
-            resize();
-            createNodes();
-        });
+        resize(); createNodes(); draw();
+        window.addEventListener('resize', function() { resize(); createNodes(); });
     })();
     </script>
 
