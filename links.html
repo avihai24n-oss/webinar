@@ -135,6 +135,30 @@
         }
 
         .link-wrapper.has-discount { padding-top: 10px; }
+        .link-wrapper.has-new { padding-top: 10px; }
+
+        .new-badge {
+            position: absolute;
+            top: -4px;
+            left: 10px;
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            box-shadow: 0 6px 20px rgba(6,182,212,0.55), 0 0 0 2px rgba(11,13,20,1);
+            z-index: 20;
+            animation: pulseBadgeNew 1.8s ease-in-out infinite;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        @keyframes pulseBadgeNew {
+            0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(6,182,212,0.55), 0 0 0 2px rgba(11,13,20,1); }
+            50% { transform: scale(1.08); box-shadow: 0 8px 28px rgba(6,182,212,0.75), 0 0 0 2px rgba(11,13,20,1); }
+        }
 
         .discount-badge {
             position: absolute;
@@ -499,8 +523,10 @@
                 const titleLower = (link.title || '').toLowerCase();
                 const isWhatsApp = urlLower.indexOf('chat.whatsapp.com') !== -1 || urlLower.indexOf('whatsapp.com') !== -1;
                 const isCourse = urlLower.indexOf('course.todowith') !== -1 || urlLower.indexOf('todowith.ai/howto') !== -1 || titleLower.indexOf('\u05e1\u05d8\u05d5\u05d3\u05d9\u05d5 \u05d1\u05db\u05d9\u05e1') !== -1;
+                const isNewApp = urlLower.indexOf('app.todowith.ai') !== -1;
 
                 if (isCourse) wrapper.classList.add('has-discount');
+                if (isNewApp) wrapper.classList.add('has-new');
 
                 const iconHtml = isWhatsApp
                     ? '<div class="link-icon whatsapp-icon">' + WHATSAPP_SVG + '</div>'
@@ -508,9 +534,11 @@
 
                 // Badge placed OUTSIDE the link-card (which has overflow:hidden) so it can float above
                 const discountBadge = isCourse ? '<span class="discount-badge">\ud83d\udd25 50% \u05d4\u05e0\u05d7\u05d4</span>' : '';
+                const newBadge = isNewApp ? '<span class="new-badge">\u2728 \u05d7\u05d3\u05e9!</span>' : '';
 
                 wrapper.innerHTML =
                     discountBadge +
+                    newBadge +
                     '<a href="' + link.url + '" target="_blank" class="link-card fade-up ' + (link.featured ? 'featured-card' : '') + '" ' +
                     'data-id="' + link.id + '" style="animation-delay:' + (i * 0.08) + 's;' + opacity + '">' +
                         (link.featured ? '<span class="featured-badge">\u05d7\u05d3\u05e9!</span>' : '') +
