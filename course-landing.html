@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סטודיו בכיס — קורס AI לצילום מוצר | TODO AI Studio</title>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1575805190328083');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1575805190328083&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="סטודיו בכיס — קורס AI לצילום מוצר ופרסומות">
+    <meta property="og:description" content="למדו לייצר תמונות מוצר, פרסומות וסרטונים ברמת סטודיו עם AI — בלי צלם, בלי סטודיו, תוך דקות. מבצע מיוחד למשתתפי הוובינר.">
+    <meta property="og:image" content="https://avihai24n-oss.github.io/webinar/photos%20for%20linktree/c9e479f7-c58d-4cf2-8e2f-031ab639443a.JPG">
+    <meta property="og:url" content="https://avihai24n-oss.github.io/webinar/course-landing.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="he_IL">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="סטודיו בכיס — קורס AI לצילום מוצר">
+    <meta name="twitter:description" content="למדו לייצר תמונות מוצר ופרסומות עם AI — בלי צלם, בלי סטודיו, תוך דקות.">
+    <meta name="twitter:image" content="https://avihai24n-oss.github.io/webinar/photos%20for%20linktree/c9e479f7-c58d-4cf2-8e2f-031ab639443a.JPG">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --dark: #0a0e1a;
+            --dark-card: #111827;
+            --dark-lighter: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #2563eb, #06b6d4);
+            --orange: #f97316;
+            --green: #22c55e;
+            --gold: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            background: radial-gradient(ellipse at 50% 0%, rgba(37, 99, 235, 0.12) 0%, transparent 60%);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-title .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title .orange { color: var(--orange); -webkit-text-fill-color: var(--orange); }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        /* ===== OFFER CARD (Hero) ===== */
+        .offer-card {
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .offer-card .urgency-tag {
+            position: absolute;
+            top: -12px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--orange);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .offer-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--white);
+        }
+
+        .offer-countdown-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.9rem;
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.4rem;
+            direction: ltr;
+        }
+
+        .cd-item { text-align: center; }
+
+        .cd-num {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-lighter);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+
+        .cd-lbl {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.7rem;
+            margin-bottom: 0.4rem;
+            direction: ltr;
+        }
+
+        .price-old {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .price-new {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--white);
+        }
+
+        .price-new .currency { font-size: 1.4rem; font-weight: 700; }
+
+        .price-discount {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--green);
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1.05rem 1.5rem;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.5);
+        }
+
+        .cta-btn.gold {
+            background: linear-gradient(135deg, var(--gold), #fbbf24);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.35);
+        }
+
+        .cta-btn.gold:hover {
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.5);
+        }
+
+        .offer-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.8rem;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-light {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-light .section-title { color: #0f172a; }
+        .section-light .section-title .highlight {
+            -webkit-text-fill-color: var(--primary);
+        }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .content-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-card:hover {
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .card-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Light version */
+        .section-light .content-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-light .content-card h4 { color: #0f172a; }
+        .section-light .content-card p { color: #64748b; }
+
+        .section-light .content-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.1);
+        }
+
+        /* ===== ABOUT ===== */
+        .about-wrapper {
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-img-col { flex-shrink: 0; }
+
+        .about-img {
+            width: 180px;
+            height: 220px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .about-stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .about-stat {
+            text-align: center;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 12px;
+            padding: 0.8rem;
+            flex: 1;
+        }
+
+        .about-stat-num {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .about-stat-lbl {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .about-text-col h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+
+        .about-role {
+            font-size: 0.85rem;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .about-text-col p.bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .about-mission {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .about-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--dark-lighter);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== LOGO CAROUSEL ===== */
+        .logo-carousel-wrapper {
+            max-width: 700px;
+            margin: 2rem auto 0;
+            text-align: center;
+        }
+
+        .logo-carousel-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .logo-carousel {
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        .logo-track {
+            display: flex;
+            gap: 2.5rem;
+            width: max-content;
+            animation: logoScroll 25s linear infinite;
+        }
+
+        @keyframes logoScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-item img {
+            height: 40px;
+            max-width: 100px;
+            object-fit: contain;
+            filter: brightness(0.8) contrast(0.9);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .logo-item img:hover {
+            opacity: 1;
+            filter: brightness(1) contrast(1);
+        }
+
+        /* ===== VIDEO SHOWCASE ===== */
+        .showcase-section {
+            padding: 1.5rem 1.5rem 4rem;
+            margin-top: -2rem;
+            text-align: center;
+        }
+
+        .showcase-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-title .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .showcase-carousel {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem 0 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            scrollbar-width: none;
+        }
+
+        .showcase-carousel::-webkit-scrollbar { display: none; }
+
+        .showcase-card {
+            flex: 0 0 300px;
+            scroll-snap-align: center;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-card:hover {
+            border-color: rgba(37, 99, 235, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .showcase-video {
+            width: 100%;
+            aspect-ratio: 9/16;
+            border: none;
+        }
+
+        .showcase-card-info {
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .showcase-card-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.4;
+        }
+
+        .showcase-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .showcase-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .showcase-dot.active {
+            background: var(--accent);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .showcase-swipe-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.8rem;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing-section {
+            padding: 4rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 20px;
+            padding: 2rem 1.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .price-card.popular {
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .price-card.popular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .price-card.premium {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .price-card.premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), #fbbf24);
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-badge.blue {
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .card-badge.gold {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .card-price-block {
+            margin-bottom: 1.2rem;
+        }
+
+        .card-price-old {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+
+        .card-price-new {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+        }
+
+        .card-price-new .currency { font-size: 1.3rem; }
+
+        .card-price-period {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: 0.2rem;
+        }
+
+        .card-price-discount {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.7rem;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 1.8rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .features-list .check {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+
+        .price-card.premium .features-list .check {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold);
+        }
+
+        .card-cta-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.7rem;
+        }
+
+        /* ===== BONUS / URGENCY ===== */
+        .bonus-section {
+            padding: 4rem 1.5rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+        }
+
+        .bonus-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(6,182,212,0.04));
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+        }
+
+        .bonus-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .bonus-card h2 {
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .bonus-card h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bonus-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .faq-q {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.3rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            direction: rtl;
+        }
+
+        .faq-q::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            padding-left: 1rem;
+        }
+
+        .faq-item.open .faq-q::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 250px;
+            padding-bottom: 1.3rem;
+        }
+
+        .faq-a p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background: radial-gradient(ellipse at 50% 100%, rgba(37, 99, 235, 0.12) 0%, transparent 60%);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .final-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .final-btn {
+            flex: 1;
+            min-width: 220px;
+            padding: 1.05rem 1.5rem;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .final-btn.primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .final-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.5);
+        }
+
+        .final-btn.secondary {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .final-btn.secondary:hover {
+            background: rgba(245, 158, 11, 0.2);
+        }
+
+        .final-contact {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        .final-contact a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ===== STICKY MOBILE CTA ===== */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.7rem 1rem;
+            background: rgba(10, 14, 26, 0.96);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(37, 99, 235, 0.2);
+            z-index: 1000;
+        }
+
+        .sticky-cta a {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid rgba(37, 99, 235, 0.05);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .sticky-cta { display: block; }
+            body { padding-bottom: 4.5rem; }
+        }
+
+        @media (max-width: 700px) {
+            .about-wrapper {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .about-text-col { text-align: center; }
+            .about-tags { justify-content: center; }
+            .about-stats-row { justify-content: center; }
+
+            .cd-num { width: 50px; height: 50px; font-size: 1.3rem; }
+
+            .offer-card { padding: 1.6rem 1.1rem; }
+
+            .about-img { width: 140px; height: 170px; }
+
+            .showcase-card { flex: 0 0 260px; }
+
+            .price-card { padding: 1.7rem 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">🎯 הצעה מיוחדת למשתתפי הוובינר</div>
+        <h1 class="hero-title">
+            צילום מוצר מקצועי <span class="highlight">עם AI</span><br>
+            ב-5 דקות — בלי צלם, בלי סטודיו<br>
+            <span class="orange">(גם אם אין לכם מושג ב-AI)</span>
+        </h1>
+        <p class="hero-sub">
+            ״סטודיו בכיס״ — הקורס שמלמד אתכם לייצר תמונות מוצר, פרסומות וסרטונים ברמת סטודיו מקצועי, מהמחשב שלכם, בלי לשלם אלפי שקלים לצלם.
+        </p>
+
+        <!-- Offer Card -->
+        <div class="offer-card" id="offer-top">
+            <span class="urgency-tag">⏳ מבצע ל-48 שעות</span>
+            <h3>סטודיו בכיס — הקורס המלא</h3>
+            <div class="offer-countdown-label">המבצע נסגר בעוד:</div>
+
+            <div class="countdown">
+                <div class="cd-item">
+                    <div class="cd-num" id="hours">00</div>
+                    <div class="cd-lbl">שעות</div>
+                </div>
+                <div class="cd-item">
+                    <div class="cd-num" id="minutes">00</div>
+                    <div class="cd-lbl">דקות</div>
+                </div>
+                <div class="cd-item">
+                    <div class="cd-num" id="seconds">00</div>
+                    <div class="cd-lbl">שניות</div>
+                </div>
+            </div>
+
+            <div class="price-row">
+                <span class="price-old">497₪</span>
+                <span class="price-new">297<span class="currency">₪</span></span>
+            </div>
+            <div class="price-discount">חיסכון של 40% — רק למשתתפי הוובינר</div>
+
+            <a href="https://course.todowith.ai/howto" class="cta-btn">לרכישת הקורס ←</a>
+            <p class="offer-note">🔒 תשלום מאובטח · גישה מיידית לאחר הרכישה</p>
+        </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="showcase-section">
+        <div class="showcase-label">🤯 נוצר כולו עם בינה מלאכותית</div>
+        <h2 class="showcase-title">ראו <span class="highlight">בעצמכם</span> מה אפשר ליצור</h2>
+        <p class="showcase-subtitle">הסרטונים האלה נוצרו עם הכלים שתלמדו בקורס</p>
+
+        <div class="showcase-carousel" id="showcaseCarousel">
+            <div class="showcase-card">
+                <iframe class="showcase-video" src="https://www.youtube.com/embed/4zNo6Pv1VRI?controls=0&modestbranding=1&rel=0&showinfo=0" title="דוגמנית AI" allowfullscreen></iframe>
+                <div class="showcase-card-info">
+                    <div class="showcase-card-badge">AI Video</div>
+                    <div class="showcase-card-title">שמלה אמיתית על דוגמנית AI — בלי צלם, בלי סטודיו</div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <iframe class="showcase-video" src="https://www.youtube.com/embed/KM8WRG0fe4o?controls=0&modestbranding=1&rel=0&showinfo=0" title="סרטון מוצר AI" allowfullscreen></iframe>
+                <div class="showcase-card-info">
+                    <div class="showcase-card-badge">AI Video</div>
+                    <div class="showcase-card-title">סרטון פרסומת למוצר טיפוח — נוצר כולו עם AI</div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <iframe class="showcase-video" src="https://www.youtube.com/embed/Rg16MBD5e2s?controls=0&modestbranding=1&rel=0&showinfo=0" title="צילומי מוצר AI" allowfullscreen></iframe>
+                <div class="showcase-card-info">
+                    <div class="showcase-card-badge">Before & After</div>
+                    <div class="showcase-card-title">מצילום בטלפון לצילום סטודיו מקצועי — בעזרת בינה מלאכותית</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="showcase-dots">
+            <div class="showcase-dot active" data-index="0"></div>
+            <div class="showcase-dot" data-index="1"></div>
+            <div class="showcase-dot" data-index="2"></div>
+        </div>
+        <p class="showcase-swipe-hint">👈 החליקו לצד לעוד דוגמאות</p>
+    </section>
+
+    <!-- What's in the course - Light section -->
+    <section class="section-light">
+        <div class="section" style="padding-top: 3rem; padding-bottom: 3rem;">
+            <span class="section-label">מה כלול בקורס</span>
+            <h2 class="section-title">מה תקבלו <span class="highlight">בתוך ״סטודיו בכיס״?</span></h2>
+
+            <div class="content-cards">
+                <div class="content-card">
+                    <div class="card-icon">💰</div>
+                    <div class="card-text">
+                        <h4>הכלי שחוסך לעסקים אלפי שקלים בחודש</h4>
+                        <p>במקום לשלם 3,000-5,000₪ על כל סט צילומים — תלמדו לייצר תוכן מקצועי בעברית, ישירות מהמחשב, בלי צלם ובלי סטודיו.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-icon">📸</div>
+                    <div class="card-text">
+                        <h4>תמונות מוצר ברמת סטודיו — בלי לצאת מהבית</h4>
+                        <p>במקום לשלם לצלם, לשכור סטודיו ולחכות שבועות — תקבלו תמונות מקצועיות תוך דקות, בדיוק בסגנון שלכם.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-icon">🎬</div>
+                    <div class="card-text">
+                        <h4>סרטון פרסומת מוכן — בלי הפקה של אלפי שקלים</h4>
+                        <p>הפקת סרטון עולה 5,000₪ ומעלה? תלמדו להפוך תמונת AI לסרטון מקצועי תוך דקות — בלי עריכה, בלי After Effects.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-text">
+                        <h4>סוכן AI אישי לבניית פרומפטים</h4>
+                        <p>גישה לסוכן AI שבונה לכם פרומפטים מדויקים לכל מוצר ולכל סגנון — בלי לבזבז שעות על ניסוי וטעייה.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-icon">📚</div>
+                    <div class="card-text">
+                        <h4>ספריית פרומפטים ותבניות מוכנות</h4>
+                        <p>גישה לכל הפרומפטים, התבניות והנכסים שאני משתמש בהם בעבודה השוטפת מול לקוחות עסקיים.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-icon">💬</div>
+                    <div class="card-text">
+                        <h4>קהילת וואטסאפ פרימיום + עדכונים תמידיים</h4>
+                        <p>הצטרפות לקהילת ה-AI הפרטית שלי — מענה לשאלות, שיתוף עבודות, ועדכונים על כלים חדשים שמצטרפים לקורס בחינם.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section" id="pricing">
+        <span class="section-label">בחרו את המסלול שלכם</span>
+        <h2 class="section-title">שני מסלולים, <span class="highlight">תוצאה אחת</span></h2>
+
+        <div class="pricing-grid">
+            <!-- COURSE -->
+            <div class="price-card popular">
+                <span class="card-badge blue">הכי פופולרי</span>
+                <div class="card-title">״סטודיו בכיס״ — הקורס המלא</div>
+
+                <div class="card-price-block">
+                    <div class="card-price-old">497 ₪</div>
+                    <div class="card-price-new">297 <span class="currency">₪</span></div>
+                    <span class="card-price-discount">40% הנחה — מבצע ל-48 שעות</span>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="check">✓</span>קורס מוקלט מלא — צעד אחרי צעד</li>
+                    <li><span class="check">✓</span>גישה לכל הפרומפטים והתבניות</li>
+                    <li><span class="check">✓</span>סוכן AI אישי לבניית פרומפטים</li>
+                    <li><span class="check">✓</span>גישה לקהילת הוואטסאפ הפרימיום</li>
+                    <li><span class="check">✓</span>עדכונים ותכנים חדשים בחינם</li>
+                    <li><span class="check">✓</span>גישה ללא הגבלת זמן</li>
+                </ul>
+
+                <a href="https://course.todowith.ai/howto" class="cta-btn">לרכישת הקורס ←</a>
+                <div class="card-cta-note">גישה מיידית לאחר הרכישה</div>
+            </div>
+
+            <!-- PREMIUM -->
+            <div class="price-card premium">
+                <span class="card-badge gold">פרימיום</span>
+                <div class="card-title">ליווי אישי לפרויקטים ב-AI</div>
+
+                <div class="card-price-block">
+                    <div class="card-price-new">1,800 <span class="currency">₪</span></div>
+                    <span class="card-price-period">לחודש · 4 מפגשים של שעה וחצי בזום</span>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="check">✓</span>ליווי אישי 1:1, מותאם לעסק שלכם</li>
+                    <li><span class="check">✓</span>עבודה ממוקדת על הפרויקט שלכם</li>
+                    <li><span class="check">✓</span>בניית פרומפטים מדויקים לכל מוצר</li>
+                    <li><span class="check">✓</span>שליטה מתקדמת בכלי AI תוך כדי עבודה</li>
+                    <li><span class="check">✓</span>מענה לשאלות והתמודדות עם אתגרים</li>
+                    <li><span class="check">✓</span>תוצאות שאתם יכולים להשתמש בהן עוד באותו שבוע</li>
+                </ul>
+
+                <a href="https://wa.me/972542064301" class="cta-btn gold">לקביעת מפגש ראשון</a>
+                <div class="card-cta-note">נחזור אליכם תוך 24 שעות</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus / Urgency -->
+    <section class="bonus-section">
+        <div class="bonus-card">
+            <div class="bonus-icon">🔥</div>
+            <h2>המחיר הזה <span class="highlight">לא יחזור</span></h2>
+            <p>הקורס נמכר ב-497 ₪ באתר. רק למשתתפי הוובינר, רק ב-48 השעות הקרובות — 297 ₪ בלבד. אחרי שהטיימר נגמר, המחיר חוזר למחיר המלא.</p>
+
+            <div class="countdown" style="margin-bottom: 1.5rem;">
+                <div class="cd-item">
+                    <div class="cd-num" id="hours-2">00</div>
+                    <div class="cd-lbl">שעות</div>
+                </div>
+                <div class="cd-item">
+                    <div class="cd-num" id="minutes-2">00</div>
+                    <div class="cd-lbl">דקות</div>
+                </div>
+                <div class="cd-item">
+                    <div class="cd-num" id="seconds-2">00</div>
+                    <div class="cd-lbl">שניות</div>
+                </div>
+            </div>
+
+            <a href="https://course.todowith.ai/howto" class="cta-btn" style="max-width: 400px;">לרכישה לפני שנגמר ←</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section>
+        <div class="section">
+            <span class="section-label">למקרה שאנחנו לא מכירים 👋</span>
+            <h2 class="section-title">מי זה <span class="highlight">אביחי אלנקווה?</span></h2>
+
+            <div class="about-wrapper reveal">
+                <div class="about-img-col">
+                    <div class="about-img">
+                        <img src="avihai.jpg" alt="אביחי אלנקווה">
+                    </div>
+
+                    <div class="about-stats-row">
+                        <div class="about-stat">
+                            <div class="about-stat-num">+50K</div>
+                            <div class="about-stat-lbl">עוקבים</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-num">מיליוני</div>
+                            <div class="about-stat-lbl">צפיות</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-text-col">
+                    <h3>אביחי אלנקווה</h3>
+                    <div class="about-role">מייסד שותף ומוביל תחום ה-AI ב-TODO AI Studio</div>
+
+                    <p class="bio">מייצר תוכן ויזואלי מבוסס בינה מלאכותית לחברות ומותגים, ובונה פתרונות AI שמחליפים צילומי סטודיו יקרים בתהליך דיגיטלי מהיר וחכם.</p>
+
+                    <p class="bio">מלמד את התחום בהרצאות, סדנאות ושיעורים פרטיים, ומוביל את אחד הערוצים הגדולים בישראל בתחום עם למעלה מ-50 אלף עוקבים ומיליוני צפיות.</p>
+
+                    <p class="about-mission">עוזר לבעלי עסקים ואנשי קריאייטיב להטמיע AI בעבודה היומיומית שלהם ולייצר תוצאות ברמה מקצועית בלי ידע טכני.</p>
+
+                    <div class="about-tags">
+                        <span class="about-tag">בינה מלאכותית</span>
+                        <span class="about-tag">תוכן ויזואלי</span>
+                        <span class="about-tag">AI לעסקים</span>
+                        <span class="about-tag">הרצאות וסדנאות</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo Carousel -->
+            <div class="logo-carousel-wrapper reveal">
+                <p class="logo-carousel-title">חברות שעבדתי איתן</p>
+                <div class="logo-carousel">
+                    <div class="logo-track" id="logoTrack"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="section">
+            <span class="section-label">שאלות שאתם בטח שואלים</span>
+            <h2 class="section-title">שאלות <span class="highlight">נפוצות</span></h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q">צריך ניסיון קודם ב-AI?</button>
+                    <div class="faq-a"><p>לא. הקורס בנוי לחלוטין למתחילים — מצעד ראשון. אם אתם יודעים להפעיל מחשב, אתם מסודרים.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">כמה זמן יש לי גישה לקורס?</button>
+                    <div class="faq-a"><p>גישה לכל החיים — בלי הגבלת זמן. כולל גישה חינמית לכל העדכונים והתכנים החדשים שמצטרפים בעתיד.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">מתי מתחילים?</button>
+                    <div class="faq-a"><p>מיידית. ברגע שמשלמים — נכנסים לאזור האישי וצופים בכל השיעורים בקצב שלכם.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">אפשר לשלם בתשלומים?</button>
+                    <div class="faq-a"><p>כן. בעמוד התשלום תוכלו לבחור עד 3 תשלומים. לעוד תשלומים — שלחו לנו הודעה בוואטסאפ ונסדר.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">זה מתאים לכל סוג עסק?</button>
+                    <div class="faq-a"><p>בהחלט. מוצרים פיזיים, שירותים, קוסמטיקה, אופנה, אוכל, תכשיטים, נדל״ן — כל מי שצריך תוכן ויזואלי לעסק שלו.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">מה אם הקורס לא יתאים לי?</button>
+                    <div class="faq-a"><p>יש אחריות מלאה — אם תוך 14 ימים תרגישו שזה לא בשבילכם, נחזיר את הכסף ללא שאלות.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section" id="final-cta">
+        <h2>מוכנים להפסיק לשלם <span style="color: var(--orange);">אלפים</span> לצלמים?</h2>
+        <p class="cta-desc">הצטרפו לעשרות בעלי עסקים שכבר עובדים עם AI</p>
+
+        <div class="final-buttons">
+            <a href="https://course.todowith.ai/howto" class="final-btn primary">לרכישת הקורס — 297 ₪</a>
+            <a href="https://wa.me/972542064301" class="final-btn secondary">ליווי אישי — 1,800 ₪/חודש</a>
+        </div>
+
+        <p class="final-contact">שאלות? דברו איתנו: <a href="https://wa.me/972542064301">054-2064301</a> 💬</p>
+    </section>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#pricing">לרכישת הקורס — 297 ₪ בלבד</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://www.instagram.com/todoai.il/" target="_blank">@todoai.il</a>
+            <a href="https://chat.whatsapp.com/Ev4cBslKwkw85u5gwadWsg" target="_blank">קהילת וואטסאפ</a>
+            <a href="https://course.todowith.ai/howto" target="_blank">course.todowith.ai</a>
+            <a href="https://todowith.ai/" target="_blank">todowith.ai</a>
+        </div>
+        <p>© 2026 TODO AI Studio · כל הזכויות שמורות</p>
+    </footer>
+
+    <script>
+        // ===== 48H COUNTDOWN (per visitor, persisted) =====
+        const TIMER_KEY = 'course_offer_start';
+        let startTime = localStorage.getItem(TIMER_KEY);
+        if (!startTime) {
+            startTime = Date.now();
+            localStorage.setItem(TIMER_KEY, startTime);
+        }
+        const endTime = parseInt(startTime) + (48 * 60 * 60 * 1000);
+
+        function updateCountdown() {
+            const now = Date.now();
+            const diff = Math.max(0, endTime - now);
+
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const hh = String(h).padStart(2, '0');
+            const mm = String(m).padStart(2, '0');
+            const ss = String(s).padStart(2, '0');
+
+            ['hours', 'hours-2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = hh; });
+            ['minutes', 'minutes-2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = mm; });
+            ['seconds', 'seconds-2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ss; });
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ===== REVEAL ON SCROLL =====
+        const reveals = document.querySelectorAll('.reveal, .content-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // ===== LOGO INFINITE LOOP =====
+        (function() {
+            const logos = [
+                { src: '2dc1ca6a-5314-4b98-b687-2fb11d080983.png', alt: 'ערוץ 12' },
+                { src: 'logo600X315.png', alt: 'קשת' },
+                { src: '672d70c2-6538-456c-aa23-320283b2f82d.png', alt: 'Webot' },
+                { src: '7482d683-14fb-49cd-8d91-f92e3b8d16ad.png', alt: 'Nym' },
+                { src: 'a45ac7e7-23b0-442c-ada4-6d7a1bd0c321.png', alt: 'Daniella' },
+                { src: 'abfa8a66-1d19-477c-852d-d3035adee613.png', alt: 'אבן נדלן' },
+                { src: 'images.png', alt: 'BizAid' }
+            ];
+            const track = document.getElementById('logoTrack');
+
+            for (let copy = 0; copy < 2; copy++) {
+                logos.forEach(function(logo) {
+                    const div = document.createElement('div');
+                    div.className = 'logo-item';
+                    div.innerHTML = '<img src="' + logo.src + '" alt="' + logo.alt + '">';
+                    track.appendChild(div);
+                });
+            }
+        })();
+
+        // ===== SHOWCASE CAROUSEL =====
+        const carousel = document.getElementById('showcaseCarousel');
+        const dots = document.querySelectorAll('.showcase-dot');
+
+        if (carousel) {
+            carousel.addEventListener('scroll', () => {
+                const scrollLeft = carousel.scrollLeft;
+                const cardWidth = carousel.querySelector('.showcase-card').offsetWidth + 19;
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === activeIndex);
+                });
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.dataset.index);
+                    const cardWidth = carousel.querySelector('.showcase-card').offsetWidth + 19;
+                    carousel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // ===== FAQ ACCORDION =====
+        document.querySelectorAll('.faq-q').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // ===== META PIXEL — INITIATE CHECKOUT ON CTA CLICK =====
+        document.querySelectorAll('a[href*="course.todowith.ai"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'InitiateCheckout', { value: 297, currency: 'ILS', content_name: 'סטודיו בכיס' });
+                }
+            });
+        });
+
+        document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (typeof fbq === 'function') {
+                    fbq('trackCustom', 'WhatsAppClick');
+                }
+            });
+        });
+    </script>
+
+    <!-- ===== META PIXEL CUSTOM EVENTS ===== -->
+    <script>
+        // VIDEO PLAY TRACKING
+        document.querySelectorAll('iframe[src*="youtube"]').forEach(function(iframe) {
+            iframe.addEventListener('mousedown', function() {
+                fbq('trackCustom', 'VideoPlay', { video: this.src });
+            }, { once: true });
+        });
+
+        // TIME ON PAGE TRACKING
+        var timeMarkers = [30, 60, 120, 300];
+        var firedMarkers = {};
+        setInterval(function() {
+            var elapsed = Math.floor((Date.now() - performance.timeOrigin) / 1000);
+            timeMarkers.forEach(function(sec) {
+                if (elapsed >= sec && !firedMarkers[sec]) {
+                    firedMarkers[sec] = true;
+                    fbq('trackCustom', 'TimeOnPage', { seconds: sec });
+                }
+            });
+        }, 5000);
+
+        // SCROLL TO BOTTOM TRACKING
+        var scrolledToBottom = false;
+        window.addEventListener('scroll', function() {
+            if (scrolledToBottom) return;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight;
+            var winHeight = window.innerHeight;
+            if ((scrollTop + winHeight) / docHeight >= 0.9) {
+                scrolledToBottom = true;
+                fbq('trackCustom', 'ScrollToBottom');
+            }
+        });
+    </script>
+</body>
+</html>
