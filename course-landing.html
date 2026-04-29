@@ -1069,6 +1069,131 @@
 
             .price-card { padding: 1.7rem 1.4rem; }
         }
+
+        /* ===== FLOW DIAGRAM ===== */
+        .flow-section {
+            padding: 4rem 1.5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .flow-step {
+            position: relative;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.18);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .flow-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .flow-step h3 {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+
+        .flow-step h3 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .flow-step-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
+        }
+
+        .flow-images {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .flow-img {
+            width: 180px;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-img:hover { transform: scale(1.04); }
+
+        .flow-img-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .flow-img-wrap { text-align: center; }
+
+        .flow-savings {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .flow-arrow {
+            display: flex;
+            justify-content: center;
+            margin: 0.4rem 0;
+            color: var(--accent);
+            font-size: 1.8rem;
+            line-height: 1;
+            animation: flowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes flowPulse {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(4px); opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            .flow-img { width: 140px; }
+            .flow-step { padding: 1.6rem 1.1rem; }
+            .flow-step-number { width: 48px; height: 48px; font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -1155,6 +1280,81 @@
             <div class="showcase-dot" data-index="2"></div>
         </div>
         <p class="showcase-swipe-hint">👈 החליקו לצד לעוד דוגמאות</p>
+    </section>
+
+    <!-- Flow Diagram -->
+    <section class="flow-section">
+        <span class="section-label">מה תדעו לעשות בסוף הקורס</span>
+        <h2 class="section-title">3 שלבים <span class="highlight">מהבית — בלי צלם, בלי סטודיו</span></h2>
+        <p style="color: var(--text-muted); max-width: 640px; margin: 0.5rem auto 2.5rem; font-size: 0.95rem;">
+            תהליך פשוט שכל בעל עסק יכול ללמוד — מהמחשב שבבית, בלי שום ידע קודם.
+        </p>
+
+        <!-- Step 1 -->
+        <div class="flow-step">
+            <div class="flow-step-number">01</div>
+            <h3>תמונות מוצר <span class="highlight">ריאליסטיות ברמת סטודיו</span></h3>
+            <p class="flow-step-desc">
+                תלמדו להפוך תמונה רגילה של המוצר שלכם לתמונות שיווקיות מקצועיות —
+                סטודיו לבן נקי, לייף-סטייל בחוף, על שולחן במסעדה — מה שתבחרו.
+                הכל מהבית, תוך דקות, בלי לצאת לצילומים.
+            </p>
+            <div class="flow-images">
+                <div class="flow-img-wrap">
+                    <img src="gallery/product-1.png" alt="תמונת מוצר על רקע לבן" class="flow-img" loading="lazy">
+                    <span class="flow-img-label">סטודיו נקי</span>
+                </div>
+                <div class="flow-img-wrap">
+                    <img src="gallery/product-2.png" alt="תמונת מוצר על החוף" class="flow-img" loading="lazy">
+                    <span class="flow-img-label">לייף-סטייל בחוף</span>
+                </div>
+                <div class="flow-img-wrap">
+                    <img src="gallery/product-3.png" alt="תמונת מוצר במסעדה" class="flow-img" loading="lazy">
+                    <span class="flow-img-label">סצנה במסעדה</span>
+                </div>
+            </div>
+            <div class="flow-savings">💰 חיסכון של 2,000–5,000 ₪ לסשן צילומים</div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <!-- Step 2 -->
+        <div class="flow-step">
+            <div class="flow-step-number">02</div>
+            <h3>ייצור <span class="highlight">דוגמנית/דוגמן לעסק שלכם</span></h3>
+            <p class="flow-step-desc">
+                במקום לשלם 1,500–3,000 ₪ לדוגמנית ליום צילומים — תלמדו לייצר דמות עקבית
+                שתשמש אתכם בכל הקמפיינים. אותה דוגמנית, בכל סצנה שתבחרו, בכל פוז —
+                בלי תיאומים, בלי הפקה.
+            </p>
+            <div class="flow-images">
+                <div class="flow-img-wrap">
+                    <img src="gallery/model-1.png" alt="דוגמנית מקצועית שנוצרה ב-AI" class="flow-img" loading="lazy">
+                    <span class="flow-img-label">דמות עקבית משלכם</span>
+                </div>
+            </div>
+            <div class="flow-savings">⚡ דוגמנית בלעדית — בלי לצאת מהבית</div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <!-- Step 3 -->
+        <div class="flow-step">
+            <div class="flow-step-number">03</div>
+            <h3>שילוב <span class="highlight">הדוגמנית עם המוצר שלכם</span></h3>
+            <p class="flow-step-desc">
+                החלק שכולם תקועים בו — איך גורמים לדוגמנית לאחוז במוצר האמיתי שלכם בצורה ריאליסטית,
+                בלי שזה ייראה מזויף. תלמדו את הטריקים שגורמים לזה לעבוד —
+                והתוצאה: קמפיינים שנראים כאילו הופקו ב-10,000 ₪.
+            </p>
+            <div class="flow-images">
+                <div class="flow-img-wrap">
+                    <img src="gallery/model-holding.png" alt="דוגמנית מחזיקה את המוצר" class="flow-img" loading="lazy">
+                    <span class="flow-img-label">שילוב מושלם</span>
+                </div>
+            </div>
+            <div class="flow-savings">🔥 קמפיין מוכן — מהמחשב שלכם</div>
+        </div>
     </section>
 
     <!-- What's in the course - Light section -->
