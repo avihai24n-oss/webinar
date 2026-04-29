@@ -1293,6 +1293,132 @@
         @media (max-width: 600px) {
             .possibility-card { flex: 0 0 220px; }
         }
+
+        /* ===== BEFORE / AFTER COMPARISONS ===== */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .compare-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .compare-card:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.18);
+        }
+
+        .compare-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .compare-side {
+            position: relative;
+            aspect-ratio: 9/16;
+            overflow: hidden;
+            background: var(--dark-lighter);
+        }
+
+        .compare-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .compare-tag {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+
+        .compare-tag.before {
+            background: rgba(15, 23, 42, 0.7);
+            color: #f1f5f9;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .compare-tag.after {
+            background: rgba(6, 182, 212, 0.85);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .compare-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            box-shadow: 0 6px 20px var(--accent-glow);
+            z-index: 3;
+        }
+
+        .compare-info {
+            padding: 1rem 1.2rem;
+            background: var(--dark-lighter);
+            text-align: right;
+        }
+
+        .compare-info-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .compare-info-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .compare-info-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 720px) {
+            .compare-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .compare-arrow { width: 38px; height: 38px; font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -1570,12 +1696,55 @@
             תוכלו לייצר לעסק שלכם, מהמחשב שבבית.
         </p>
 
+        <!-- Big Before/After comparisons -->
+        <div class="compare-grid">
+            <div class="compare-card">
+                <div class="compare-pair">
+                    <div class="compare-side">
+                        <span class="compare-tag before">לפני · מהטלפון</span>
+                        <img src="gallery/before-bag.png" alt="צילום מהטלפון של תיק" loading="lazy">
+                    </div>
+                    <div class="compare-arrow">←</div>
+                    <div class="compare-side">
+                        <span class="compare-tag after">אחרי · AI</span>
+                        <img src="gallery/ad-bag.png" alt="פרסומת AI לתיק יד" loading="lazy">
+                    </div>
+                </div>
+                <div class="compare-info">
+                    <span class="compare-info-badge">אופנה</span>
+                    <div class="compare-info-title">מצילום בטלפון לפרסומת לקסז׳ואלית</div>
+                    <p class="compare-info-desc">אותו תיק, אותו מוצר — רק שעכשיו הוא נראה כאילו צולם לקמפיין יוקרתי.</p>
+                </div>
+            </div>
+
+            <div class="compare-card">
+                <div class="compare-pair">
+                    <div class="compare-side">
+                        <span class="compare-tag before">לפני · מהטלפון</span>
+                        <img src="gallery/before-honey.jpg" alt="צילום מהטלפון של אריזת דבש" loading="lazy">
+                    </div>
+                    <div class="compare-arrow">←</div>
+                    <div class="compare-side">
+                        <span class="compare-tag after">אחרי · AI</span>
+                        <img src="gallery/ad-honey.png" alt="פרסומת AI לדבש ויסוצקי" loading="lazy">
+                    </div>
+                </div>
+                <div class="compare-info">
+                    <span class="compare-info-badge">מותג צריכה</span>
+                    <div class="compare-info-title">מצילום מטושטש לפרסומת חגיגית</div>
+                    <p class="compare-info-desc">תמונה רגילה של אריזה הופכת לפרסומת מותג מקצועית — תוך דקות.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smaller AI-only carousel -->
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 1rem 0 1rem;">ועוד פרסומות שיצרנו בקורס:</p>
         <div class="possibilities-carousel">
             <div class="possibility-card">
                 <img src="gallery/ad-nutella.png" alt="פרסומת AI לנוטלה" loading="lazy">
                 <div class="possibility-card-info">
                     <span class="possibility-card-badge">מותג מזון</span>
-                    <div class="possibility-card-title">פרסומת מקצועית — מצילום פשוט</div>
+                    <div class="possibility-card-title">פרסומת דינמית למוצר אייקוני</div>
                 </div>
             </div>
             <div class="possibility-card">
@@ -1586,24 +1755,10 @@
                 </div>
             </div>
             <div class="possibility-card">
-                <img src="gallery/ad-bag.png" alt="פרסומת AI לתיק יד" loading="lazy">
-                <div class="possibility-card-info">
-                    <span class="possibility-card-badge">אופנה</span>
-                    <div class="possibility-card-title">פרסומת לקסז׳ואל יוקרתי</div>
-                </div>
-            </div>
-            <div class="possibility-card">
                 <img src="gallery/ad-ramen.png" alt="פרסומת AI למסעדה" loading="lazy">
                 <div class="possibility-card-info">
                     <span class="possibility-card-badge">מסעדנות</span>
                     <div class="possibility-card-title">סצנת מנה דינמית</div>
-                </div>
-            </div>
-            <div class="possibility-card">
-                <img src="gallery/ad-honey.png" alt="פרסומת AI למוצר ויסוצקי" loading="lazy">
-                <div class="possibility-card-info">
-                    <span class="possibility-card-badge">מותג צריכה</span>
-                    <div class="possibility-card-title">פרסומת חגיגית לדבש</div>
                 </div>
             </div>
         </div>
