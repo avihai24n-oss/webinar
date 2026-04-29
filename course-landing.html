@@ -1194,6 +1194,105 @@
             .flow-step { padding: 1.6rem 1.1rem; }
             .flow-step-number { width: 48px; height: 48px; font-size: 1.2rem; }
         }
+
+        /* ===== POSSIBILITIES CAROUSEL ===== */
+        .possibilities-section {
+            padding: 4rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .possibilities-section .section-title {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .possibilities-tagline {
+            font-size: clamp(1rem, 2.4vw, 1.15rem);
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0.8rem auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .possibilities-tagline strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .possibilities-carousel {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem 1rem 1.8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            scrollbar-width: none;
+        }
+
+        .possibilities-carousel::-webkit-scrollbar { display: none; }
+
+        .possibility-card {
+            flex: 0 0 240px;
+            scroll-snap-align: center;
+            background: var(--dark-card);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .possibility-card:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .possibility-card img {
+            width: 100%;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+            display: block;
+        }
+
+        .possibility-card-info {
+            padding: 0.9rem 1rem;
+            background: var(--dark-lighter);
+            text-align: right;
+        }
+
+        .possibility-card-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .possibility-card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .possibilities-swipe-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        @media (max-width: 600px) {
+            .possibility-card { flex: 0 0 220px; }
+        }
     </style>
 </head>
 <body>
@@ -1460,6 +1559,55 @@
                 <div class="card-cta-note">נחזור אליכם תוך 24 שעות</div>
             </div>
         </div>
+    </section>
+
+    <!-- Possibilities — what you can create -->
+    <section class="possibilities-section">
+        <span class="section-label">מה תוכלו ליצור</span>
+        <h2 class="section-title">אחרי הקורס הזה <span class="highlight">תדעו לשלוט בבינה מלאכותית</span></h2>
+        <p class="possibilities-tagline">
+            הגבול היחיד יהיה <strong>הדמיון שלכם</strong>. כל פרסומת שתראו ברחוב, באינסטגרם או בעולם —
+            תוכלו לייצר לעסק שלכם, מהמחשב שבבית.
+        </p>
+
+        <div class="possibilities-carousel">
+            <div class="possibility-card">
+                <img src="gallery/ad-nutella.png" alt="פרסומת AI לנוטלה" loading="lazy">
+                <div class="possibility-card-info">
+                    <span class="possibility-card-badge">מותג מזון</span>
+                    <div class="possibility-card-title">פרסומת מקצועית — מצילום פשוט</div>
+                </div>
+            </div>
+            <div class="possibility-card">
+                <img src="gallery/ad-amika.png" alt="פרסומת AI לטיפוח שיער" loading="lazy">
+                <div class="possibility-card-info">
+                    <span class="possibility-card-badge">קוסמטיקה</span>
+                    <div class="possibility-card-title">קמפיין דרמטי לטיפוח</div>
+                </div>
+            </div>
+            <div class="possibility-card">
+                <img src="gallery/ad-bag.png" alt="פרסומת AI לתיק יד" loading="lazy">
+                <div class="possibility-card-info">
+                    <span class="possibility-card-badge">אופנה</span>
+                    <div class="possibility-card-title">פרסומת לקסז׳ואל יוקרתי</div>
+                </div>
+            </div>
+            <div class="possibility-card">
+                <img src="gallery/ad-ramen.png" alt="פרסומת AI למסעדה" loading="lazy">
+                <div class="possibility-card-info">
+                    <span class="possibility-card-badge">מסעדנות</span>
+                    <div class="possibility-card-title">סצנת מנה דינמית</div>
+                </div>
+            </div>
+            <div class="possibility-card">
+                <img src="gallery/ad-honey.png" alt="פרסומת AI למוצר ויסוצקי" loading="lazy">
+                <div class="possibility-card-info">
+                    <span class="possibility-card-badge">מותג צריכה</span>
+                    <div class="possibility-card-title">פרסומת חגיגית לדבש</div>
+                </div>
+            </div>
+        </div>
+        <p class="possibilities-swipe-hint">👈 החליקו לעוד דוגמאות</p>
     </section>
 
     <!-- Bonus / Urgency -->
