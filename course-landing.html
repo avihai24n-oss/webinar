@@ -1425,7 +1425,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-badge">🎯 הצעה מיוחדת — 48 שעות בלבד</div>
+        <div class="hero-badge">🎯 הצעה מיוחדת — 24 שעות בלבד</div>
         <h1 class="hero-title">
             צילום מוצר מקצועי <span class="highlight">עם AI</span><br>
             ב-5 דקות — בלי צלם, בלי סטודיו<br>
@@ -1437,7 +1437,7 @@
 
         <!-- Offer Card -->
         <div class="offer-card" id="offer-top">
-            <span class="urgency-tag">⏳ מבצע ל-48 שעות</span>
+            <span class="urgency-tag">⏳ מבצע ל-24 שעות</span>
             <h3>סטודיו בכיס — הקורס המלא</h3>
             <div class="offer-countdown-label">המבצע נסגר בעוד:</div>
 
@@ -1646,7 +1646,7 @@
                 <div class="card-price-block">
                     <div class="card-price-old">497 ₪</div>
                     <div class="card-price-new">297 <span class="currency">₪</span></div>
-                    <span class="card-price-discount">40% הנחה — מבצע ל-48 שעות</span>
+                    <span class="card-price-discount">40% הנחה — מבצע ל-24 שעות</span>
                 </div>
 
                 <ul class="features-list">
@@ -1770,7 +1770,7 @@
         <div class="bonus-card">
             <div class="bonus-icon">🔥</div>
             <h2>המחיר הזה <span class="highlight">לא יחזור</span></h2>
-            <p>הקורס נמכר ב-497 ₪ באתר. רק ב-48 השעות הקרובות — 297 ₪ בלבד. אחרי שהטיימר נגמר, המחיר חוזר למחיר המלא.</p>
+            <p>הקורס נמכר ב-497 ₪ באתר. רק ב-24 השעות הקרובות — 297 ₪ בלבד. אחרי שהטיימר נגמר, המחיר חוזר למחיר המלא.</p>
 
             <div class="countdown" style="margin-bottom: 1.5rem;">
                 <div class="cd-item">
@@ -1902,18 +1902,34 @@
     </footer>
 
     <script>
-        // ===== 48H COUNTDOWN (per visitor, persisted) =====
+        // ===== 24H COUNTDOWN (per visitor, persisted, auto-resets at 1h remaining) =====
         const TIMER_KEY = 'course_offer_start';
-        let startTime = localStorage.getItem(TIMER_KEY);
-        if (!startTime) {
-            startTime = Date.now();
-            localStorage.setItem(TIMER_KEY, startTime);
+        const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+        const RESET_THRESHOLD_MS = 60 * 60 * 1000; // reset when <= 1 hour remains
+
+        function getStartTime() {
+            let s = parseInt(localStorage.getItem(TIMER_KEY));
+            if (!s || isNaN(s)) {
+                s = Date.now();
+                localStorage.setItem(TIMER_KEY, s);
+            }
+            return s;
         }
-        const endTime = parseInt(startTime) + (48 * 60 * 60 * 1000);
+
+        let startTime = getStartTime();
+        let endTime = startTime + DURATION_MS;
 
         function updateCountdown() {
             const now = Date.now();
-            const diff = Math.max(0, endTime - now);
+            let diff = endTime - now;
+
+            // Reset back to 24h whenever we hit the last hour (or expired)
+            if (diff <= RESET_THRESHOLD_MS) {
+                startTime = Date.now();
+                localStorage.setItem(TIMER_KEY, startTime);
+                endTime = startTime + DURATION_MS;
+                diff = endTime - now;
+            }
 
             const h = Math.floor(diff / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
