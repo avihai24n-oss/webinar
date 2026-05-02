@@ -1475,7 +1475,7 @@
 
         <div class="showcase-carousel" id="showcaseCarousel">
             <div class="showcase-card">
-                <iframe class="showcase-video" src="https://www.youtube.com/embed/4zNo6Pv1VRI?controls=0&modestbranding=1&rel=0&showinfo=0" title="דוגמנית AI" allowfullscreen></iframe>
+                <iframe id="hero-video" class="showcase-video" src="https://www.youtube.com/embed/4zNo6Pv1VRI?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1" title="דוגמנית AI" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 <div class="showcase-card-info">
                     <div class="showcase-card-badge">AI Video</div>
                     <div class="showcase-card-title">שמלה אמיתית על דוגמנית AI — בלי צלם, בלי סטודיו</div>
@@ -2079,6 +2079,75 @@
                 fbq('trackCustom', 'ScrollToBottom');
             }
         });
+    </script>
+
+    <!-- Hero Video Auto-Play on Scroll -->
+    <script>
+        // Load YouTube IFrame API
+        (function() {
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        })();
+
+        var heroPlayer = null;
+        var heroPlayerReady = false;
+        var userInteracted = false;
+
+        function onYouTubeIframeAPIReady() {
+            heroPlayer = new YT.Player('hero-video', {
+                events: {
+                    'onReady': function(event) {
+                        heroPlayerReady = true;
+                        setupHeroObserver();
+                    }
+                }
+            });
+        }
+
+        function setupHeroObserver() {
+            var iframe = document.getElementById('hero-video');
+            if (!iframe || !heroPlayerReady) return;
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!heroPlayer || typeof heroPlayer.playVideo !== 'function') return;
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        // In view: try to play with sound
+                        try {
+                            if (userInteracted) {
+                                heroPlayer.unMute();
+                            } else {
+                                heroPlayer.mute();
+                            }
+                            heroPlayer.playVideo();
+                        } catch (e) {}
+                    } else {
+                        try { heroPlayer.pauseVideo(); } catch (e) {}
+                    }
+                });
+            }, { threshold: [0, 0.5] });
+
+            observer.observe(iframe);
+        }
+
+        // Unmute on first user interaction (browsers require gesture for sound)
+        function unlockAudio() {
+            userInteracted = true;
+            if (heroPlayer && typeof heroPlayer.unMute === 'function') {
+                try {
+                    heroPlayer.unMute();
+                    heroPlayer.setVolume(80);
+                } catch (e) {}
+            }
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+            document.removeEventListener('keydown', unlockAudio);
+        }
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+        document.addEventListener('keydown', unlockAudio);
     </script>
 </body>
 </html>
