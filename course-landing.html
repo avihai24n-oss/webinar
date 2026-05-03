@@ -1419,6 +1419,68 @@
             }
             .compare-arrow { width: 38px; height: 38px; font-size: 1rem; }
         }
+
+        /* ===== LECTURE VIDEO (TRUST BOOSTER) ===== */
+        .lecture-video-wrap {
+            margin: 3rem auto 2rem;
+            text-align: center;
+            max-width: 720px;
+        }
+
+        .lecture-video-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+        }
+
+        .lecture-video-title {
+            font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .lecture-video-title .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lecture-video-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .lecture-video {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+            aspect-ratio: 9/16;
+            margin: 0 auto;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+        }
+
+        .lecture-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -1464,6 +1526,19 @@
 
             <a href="https://course.todowith.ai/howto" class="cta-btn">לרכישת הקורס ←</a>
             <p class="offer-note">🔒 תשלום מאובטח · גישה מיידית לאחר הרכישה</p>
+        </div>
+    </section>
+
+    <!-- Lecture Video — Ice Breaker / Trust Booster -->
+    <section class="lecture-section">
+        <div class="lecture-video-wrap reveal">
+            <p class="lecture-video-label">📍 רגע מתוך הרצאה אחרונה שלי</p>
+            <h3 class="lecture-video-title">למה <span class="highlight">כל עסק</span> חייב להכיר AI</h3>
+            <p class="lecture-video-sub">איך AI חוסך זמן, כסף — ועוזר לעסק שלכם להישאר רלוונטי בשנים הבאות</p>
+
+            <div class="lecture-video">
+                <iframe src="https://www.youtube.com/embed/UruzN9Be6FY?rel=0&modestbranding=1&playsinline=1" title="הרצאה על AI לעסקים — אביחי אלנקווה" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
 
