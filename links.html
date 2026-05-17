@@ -136,6 +136,30 @@
 
         .link-wrapper.has-discount { padding-top: 10px; }
         .link-wrapper.has-new { padding-top: 10px; }
+        .link-wrapper.has-hot { padding-top: 10px; }
+
+        .hot-badge {
+            position: absolute;
+            top: -4px;
+            left: 10px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            box-shadow: 0 6px 20px rgba(249,115,22,0.55), 0 0 0 2px rgba(11,13,20,1);
+            z-index: 20;
+            animation: pulseBadgeHot 1.8s ease-in-out infinite;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        @keyframes pulseBadgeHot {
+            0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(249,115,22,0.55), 0 0 0 2px rgba(11,13,20,1); }
+            50% { transform: scale(1.08); box-shadow: 0 8px 28px rgba(249,115,22,0.75), 0 0 0 2px rgba(11,13,20,1); }
+        }
 
         .new-badge {
             position: absolute;
@@ -479,6 +503,21 @@
             <span>🔒 מצב מנהל — הקליקים והעריכה גלויים</span>
         </div>
 
+        <!-- Static featured link (always at top) -->
+        <div class="links" style="margin-bottom: 0.8rem;">
+            <div class="link-wrapper has-hot fade-up" style="animation-delay: 0.05s;">
+                <span class="hot-badge">🔥 חם</span>
+                <a href="https://app.todowith.ai/baseball-trend" target="_blank" class="link-card" id="baseballTrendLink">
+                    <div class="link-icon">⚾</div>
+                    <div class="link-text">
+                        <div class="link-title">טרנד הבייסבול</div>
+                        <div class="link-sub">הטרנד החם של AI — צפו עכשיו</div>
+                    </div>
+                    <span class="link-arrow">←</span>
+                </a>
+            </div>
+        </div>
+
         <!-- Links loaded from Supabase -->
         <div class="links" id="linksContainer">
             <div style="text-align:center; color: var(--gray); padding: 2rem;">טוען...</div>
@@ -776,6 +815,14 @@
 
     // Load on start
     loadLinks();
+
+    // Track click on static baseball-trend link
+    var baseballLink = document.getElementById('baseballTrendLink');
+    if (baseballLink) {
+        baseballLink.addEventListener('click', function() {
+            fbq('trackCustom', 'LinkClick', { link: 'טרנד הבייסבול' });
+        });
+    }
     </script>
 
     <script>
